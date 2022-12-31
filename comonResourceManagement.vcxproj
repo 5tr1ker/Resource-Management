@@ -136,7 +136,19 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="functions.h" />
-    <ClInclude Include="popUp.h">
+    <ClInclude Include="popUp_buyer.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="popUp_classification.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="popUp_location.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="popUp_status.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="popUp_user.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="resourceDetail.h">
@@ -147,8 +159,20 @@
     <EmbeddedResource Include="createResource.resx">
       <DependentUpon>createResource.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="popUp.resx">
-      <DependentUpon>popUp.h</DependentUpon>
+    <EmbeddedResource Include="popUp_buyer.resx">
+      <DependentUpon>popUp_buyer.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="popUp_classification.resx">
+      <DependentUpon>popUp_classification.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="popUp_location.resx">
+      <DependentUpon>popUp_location.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="popUp_status.resx">
+      <DependentUpon>popUp_status.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="popUp_user.resx">
+      <DependentUpon>popUp_user.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="resourceDetail.resx">
       <DependentUpon>resourceDetail.h</DependentUpon>

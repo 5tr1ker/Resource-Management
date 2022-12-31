@@ -1,6 +1,11 @@
 #pragma once
 
 #include "functions.h"
+#include "popUp_classification.h"
+#include "popup_status.h"
+#include "popUp_location.h"
+#include "popUp_user.h"
+#include "popUp_buyer.h"
 #include <msclr\marshal_cppstd.h>
 using namespace System::Text;
 using namespace System::IO;
@@ -502,6 +507,7 @@ namespace comonResourceManagement {
 			this->button3->TabIndex = 6;
 			this->button3->Text = L"구매처 등록";
 			this->button3->UseVisualStyleBackColor = false;
+			this->button3->Click += gcnew System::EventHandler(this, &createResource::button3_Click);
 			// 
 			// button4
 			// 
@@ -512,6 +518,7 @@ namespace comonResourceManagement {
 			this->button4->TabIndex = 7;
 			this->button4->Text = L"직원 등록";
 			this->button4->UseVisualStyleBackColor = false;
+			this->button4->Click += gcnew System::EventHandler(this, &createResource::button4_Click);
 			// 
 			// button5
 			// 
@@ -522,6 +529,7 @@ namespace comonResourceManagement {
 			this->button5->TabIndex = 8;
 			this->button5->Text = L"추가";
 			this->button5->UseVisualStyleBackColor = false;
+			this->button5->Click += gcnew System::EventHandler(this, &createResource::button5_Click);
 			// 
 			// button6
 			// 
@@ -532,6 +540,7 @@ namespace comonResourceManagement {
 			this->button6->TabIndex = 9;
 			this->button6->Text = L"추가";
 			this->button6->UseVisualStyleBackColor = false;
+			this->button6->Click += gcnew System::EventHandler(this, &createResource::button6_Click);
 			// 
 			// button8
 			// 
@@ -542,6 +551,7 @@ namespace comonResourceManagement {
 			this->button8->TabIndex = 10;
 			this->button8->Text = L"추가";
 			this->button8->UseVisualStyleBackColor = false;
+			this->button8->Click += gcnew System::EventHandler(this, &createResource::button8_Click);
 			// 
 			// createResource
 			// 
@@ -663,6 +673,61 @@ private: System::Void button7_Click(System::Object^ sender, System::EventArgs^ e
 	
 }
 private: System::Void tableLayoutPanel3_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+}
+private: System::Void button8_Click(System::Object^ sender, System::EventArgs^ e) {
+	resourceManagement rm;
+	popUp_classification pu;
+	pu.ShowDialog();
+
+	classification_box->Items->Clear();
+	list<string> classicicationList = rm.getClassificationList();
+	for (string listData : classicicationList) {
+		classification_box->Items->Add(gcnew String(listData.c_str()));
+	}
+}
+private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) {
+	resourceManagement rm;
+	popUp_status pu;
+	pu.ShowDialog();
+
+	status_box->Items->Clear();
+	list<string> classicicationList = rm.getStatusList();
+	for (string listData : classicicationList) {
+		status_box->Items->Add(gcnew String(listData.c_str()));
+	}
+}
+private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
+	resourceManagement rm;
+	popUp_location pu;
+	pu.ShowDialog();
+
+	locate_box->Items->Clear();
+	list<string> classicicationList = rm.getLocationList();
+	for (string listData : classicicationList) {
+		locate_box->Items->Add(gcnew String(listData.c_str()));
+	}
+}
+private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
+	resourceManagement rm;
+	popUp_user pu;
+	pu.ShowDialog();
+
+	user_box->Items->Clear();
+	list<string> classicicationList = rm.getUserList();
+	for (string listData : classicicationList) {
+		user_box->Items->Add(gcnew String(listData.c_str()));
+	}
+}
+private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+	resourceManagement rm;
+	popUp_buyer pu;
+	pu.ShowDialog();
+
+	whereBuy_box->Items->Clear();
+	list<string> classicicationList = rm.getBuyerList();
+	for (string listData : classicicationList) {
+		whereBuy_box->Items->Add(gcnew String(listData.c_str()));
+	}
 }
 };
 }

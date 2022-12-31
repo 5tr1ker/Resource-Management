@@ -477,3 +477,31 @@ list<string> resourceManagement::getBuyerList() {
 
 	return list;
 }
+
+int resourceManagement::createNewList(string query) {
+	MYSQL* conn, connection;
+	MYSQL_RES* result;
+	MYSQL_ROW row;
+
+	list<string> list;
+	char DB_HOST[] = "localhost";
+	char DB_USER[] = "root";
+	char DB_PASS[] = "password";
+	char DB_NAME[] = "comon";
+
+
+	// DB Ä¿³Ø¼Ç ¿¬°á
+	mysql_init(&connection);
+	conn = mysql_real_connect(&connection, DB_HOST, DB_USER, DB_PASS, DB_NAME, 3306, (char*)NULL, 0);
+	char sql[1024];
+
+	mysql_query(conn, "set session character_set_connection=euckr;");
+	mysql_query(conn, "set session character_set_results=euckr;");
+	mysql_query(conn, "set session character_set_client=euckr;");
+	strcpy_s(sql, query.c_str());
+
+	if (mysql_query(conn, sql) == 0) {
+		return 1;
+	}
+	return -1;
+}

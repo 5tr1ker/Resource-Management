@@ -19,6 +19,7 @@ public:
 	list<string> getLocationList();
 	list<string> getUserList();
 	list<string> getBuyerList();
+	int createNewList(string query);
 	// 소프트웨어 정보
 	void updateSystemInfo();
 	void updateSoftwareInfo();

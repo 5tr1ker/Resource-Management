@@ -2,4 +2,8 @@ C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\x64\
 C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\x64\Debug\comonResourceManagement.vcxproj.GenerateResource.cache
 C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\x64\Debug\comonResourceManagement.vcxproj.AssemblyReference.cache
 C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\x64\Debug\comonResourceManagement.createResource.resources
-C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\x64\Debug\comonResourceManagement.popUp.resources
+C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\x64\Debug\comonResourceManagement.popUp_classification.resources
+C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\x64\Debug\comonResourceManagement.popUp_status.resources
+C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\x64\Debug\comonResourceManagement.popUp_location.resources
+C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\x64\Debug\comonResourceManagement.popUp_user.resources
+C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\x64\Debug\comonResourceManagement.popUp_buyer.resources

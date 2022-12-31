@@ -35,7 +35,19 @@
     <ClInclude Include="createResource.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="popUp.h">
+    <ClInclude Include="popUp_classification.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="popUp_status.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="popUp_location.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="popUp_user.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="popUp_buyer.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
   </ItemGroup>

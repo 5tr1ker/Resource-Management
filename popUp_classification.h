@@ -1,5 +1,6 @@
 #pragma once
-
+#include <msclr\marshal_cppstd.h>
+#include "functions.h"
 namespace comonResourceManagement {
 
 	using namespace System;
@@ -14,10 +15,10 @@ namespace comonResourceManagement {
 	/// <summary>
 	/// popUp에 대한 요약입니다.
 	/// </summary>
-	public ref class popUp : public System::Windows::Forms::Form
+	public ref class popUp_classification : public System::Windows::Forms::Form
 	{
 	public:
-		popUp(void)
+		popUp_classification(void)
 		{
 			InitializeComponent();
 			//
@@ -29,7 +30,7 @@ namespace comonResourceManagement {
 		/// <summary>
 		/// 사용 중인 모든 리소스를 정리합니다.
 		/// </summary>
-		~popUp()
+		~popUp_classification()
 		{
 			if (components)
 			{
@@ -37,8 +38,9 @@ namespace comonResourceManagement {
 			}
 		}
 	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::TextBox^ items;
 	protected:
-	private: System::Windows::Forms::TextBox^ textBox1;
+
 	private: System::Windows::Forms::Button^ submit_button;
 	private: System::Windows::Forms::Button^ cancel;
 
@@ -55,9 +57,9 @@ namespace comonResourceManagement {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(popUp::typeid));
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(popUp_classification::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->items = (gcnew System::Windows::Forms::TextBox());
 			this->submit_button = (gcnew System::Windows::Forms::Button());
 			this->cancel = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
@@ -67,18 +69,18 @@ namespace comonResourceManagement {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"맑은 고딕", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
-			this->label1->Location = System::Drawing::Point(30, 21);
+			this->label1->Location = System::Drawing::Point(12, 20);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(218, 21);
+			this->label1->Size = System::Drawing::Size(256, 21);
 			this->label1->TabIndex = 0;
-			this->label1->Text = L"추가할 항목을 입력해주세요.";
+			this->label1->Text = L"추가할 분류 항목을 입력해주세요.";
 			// 
-			// textBox1
+			// items
 			// 
-			this->textBox1->Location = System::Drawing::Point(34, 58);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(214, 21);
-			this->textBox1->TabIndex = 1;
+			this->items->Location = System::Drawing::Point(34, 58);
+			this->items->Name = L"items";
+			this->items->Size = System::Drawing::Size(214, 21);
+			this->items->TabIndex = 1;
 			// 
 			// submit_button
 			// 
@@ -88,6 +90,7 @@ namespace comonResourceManagement {
 			this->submit_button->TabIndex = 2;
 			this->submit_button->Text = L"추가";
 			this->submit_button->UseVisualStyleBackColor = true;
+			this->submit_button->Click += gcnew System::EventHandler(this, &popUp_classification::submit_button_Click);
 			// 
 			// cancel
 			// 
@@ -97,7 +100,7 @@ namespace comonResourceManagement {
 			this->cancel->TabIndex = 3;
 			this->cancel->Text = L"취소";
 			this->cancel->UseVisualStyleBackColor = true;
-			this->cancel->Click += gcnew System::EventHandler(this, &popUp::cancel_Click);
+			this->cancel->Click += gcnew System::EventHandler(this, &popUp_classification::cancel_Click);
 			// 
 			// popUp
 			// 
@@ -106,7 +109,7 @@ namespace comonResourceManagement {
 			this->ClientSize = System::Drawing::Size(277, 138);
 			this->Controls->Add(this->cancel);
 			this->Controls->Add(this->submit_button);
-			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->items);
 			this->Controls->Add(this->label1);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"popUp";
@@ -119,5 +122,25 @@ namespace comonResourceManagement {
 	private: System::Void cancel_Click(System::Object^ sender, System::EventArgs^ e) {
 		Close();
 	}
-	};
+
+	private: System::Void submit_button_Click(System::Object^ sender, System::EventArgs^ e) {
+		resourceManagement rm;
+		string item = msclr::interop::marshal_as<std::string>(items->Text);
+		if (item.size() == 0) {
+			MessageBox::Show("문항을 입력해주세요.");
+		}
+		else {
+			string query = "INSERT INTO `comon`.`classification_list` (`classification_item`) VALUES ('" + item + "');";
+			int result = rm.createNewList(query);
+
+			if (result == 1) {
+				MessageBox::Show("등록하였습니다!");
+				Close();
+			}
+			else {
+				MessageBox::Show("오류가 발생했습니다. 로그를 확인해주세요.");
+			}
+		}
+	}
+};
 }
