@@ -1,0 +1,6 @@
+﻿  resourceDetail.cpp
+  resourceDetail.obj : MSIL 모듈이 발견되었습니다. MSIL에 증분 링크를 사용할 수 없습니다. 전체 링크를 수행하고 있습니다.
+resourceDetail.obj : error LNK2028: 해결되지 않은 토큰(0A0004A9) "extern "C" char const * __stdcall mysql_get_client_info(void)" (?mysql_get_client_info@@$$J10YGPBDXZ)을(를) "private: void __clrcall comonResourceManagement::resourceDetail::MyForm_Load(class System::Object ^,class System::EventArgs ^)" (?MyForm_Load@resourceDetail@comonResourceManagement@@$$FA$AAMXP$AAVObject@System@@P$AAVEventArgs@4@@Z) 함수에서 참조했습니다.
+resourceDetail.obj : error LNK2019: "extern "C" char const * __stdcall mysql_get_client_info(void)" (?mysql_get_client_info@@$$J10YGPBDXZ)"private: void __clrcall comonResourceManagement::resourceDetail::MyForm_Load(class System::Object ^,class System::EventArgs ^)" (?MyForm_Load@resourceDetail@comonResourceManagement@@$$FA$AAMXP$AAVObject@System@@P$AAVEventArgs@4@@Z) 함수에서 참조되는 확인할 수 없는 외부 기호
+C:\Program Files\MySQL\MySQL Server 8.0\lib\libmysql.lib : warning LNK4272: 'x64' 라이브러리 컴퓨터 종류가 'x86' 대상 컴퓨터 종류와 충돌합니다.
+C:\Users\tjseo\source\repos\comonResourceManagement\Debug\comonResourceManagement.exe : fatal error LNK1120: 2개의 확인할 수 없는 외부 참조입니다.

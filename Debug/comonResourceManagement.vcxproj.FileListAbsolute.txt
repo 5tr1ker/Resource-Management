@@ -1,0 +1,3 @@
+C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\Debug\comonResourceManagement.vcxproj.AssemblyReference.cache
+C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\Debug\comonResourceManagement.resourceDetail.resources
+C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\Debug\comonResourceManagement.vcxproj.GenerateResource.cache
