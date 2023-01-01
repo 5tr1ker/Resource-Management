@@ -1,3 +1,7 @@
-﻿  resourceDetail.cpp
-  resource.obj : MSIL 모듈이 발견되었습니다. MSIL에 증분 링크를 사용할 수 없습니다. 전체 링크를 수행하고 있습니다.
+﻿  historys.cpp
+C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\historys.cpp(60,17): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\historys.cpp(43,12): warning C4101: 'row' :참조되지 않은 지역 변수입니다.
+  mains.cpp
+  코드를 생성하고 있습니다...
+  historys.obj : MSIL 모듈이 발견되었습니다. MSIL에 증분 링크를 사용할 수 없습니다. 전체 링크를 수행하고 있습니다.
   comonResourceManagement.vcxproj -> C:\Users\tjseo\source\repos\comonResourceManagement\x64\Debug\comonResourceManagement.exe

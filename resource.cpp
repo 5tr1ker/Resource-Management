@@ -87,7 +87,8 @@ string resourceManagement::createULID() {
 	return ulid;
 }
 
-void resourceManagement::getDetailResource(const char* ulid) {
+resourceData resourceManagement::getDetailResource(const char* ulid) {
+	resourceData rd;
 	MYSQL* conn, connection;
 	MYSQL_RES* result;
 	MYSQL_ROW row;
@@ -102,6 +103,10 @@ void resourceManagement::getDetailResource(const char* ulid) {
 	conn = mysql_real_connect(&connection, DB_HOST, DB_USER, DB_PASS, DB_NAME, 3306, (char*)NULL, 0);
 	char sql[1024];
 
+	mysql_query(conn, "set session character_set_connection=euckr;");
+	mysql_query(conn, "set session character_set_results=euckr;");
+	mysql_query(conn, "set session character_set_client=euckr;");
+
 	string ulid_id(ulid);
 	string query = "SELECT * from resource_details where ulid = '" + ulid_id + "';";
 	strcpy_s(sql, query.c_str());
@@ -109,7 +114,18 @@ void resourceManagement::getDetailResource(const char* ulid) {
 	if (mysql_query(conn, sql) == 0) {
 		result = mysql_store_result(conn);
 		while ((row = mysql_fetch_row(result)) != NULL) {
-			cout << row[0] << row[1] << row[2] << endl;
+			rd.ulid = row[0];
+			rd.image = row[1];
+			rd.resourcename = row[2];
+			rd.classification = row[3];
+			rd.status = row[4];
+			rd.location = row[5];
+			rd.user = row[6];
+			rd.entroll_date = row[7];
+			rd.modify_date = row[8];
+			rd.where_purchase = row[9];
+			rd.first_purchase = row[10];
+			rd.price = row[11];
 		}
 		mysql_free_result(result);
 	}
@@ -117,6 +133,7 @@ void resourceManagement::getDetailResource(const char* ulid) {
 		cerr << "SQL 문 실행에 실패했습니다.";
 	}
 
+	return rd;
 }
 
 void resourceManagement::getTotalResourceCount() {
@@ -479,6 +496,34 @@ list<string> resourceManagement::getBuyerList() {
 }
 
 int resourceManagement::createNewList(string query) {
+	MYSQL* conn, connection;
+	MYSQL_RES* result;
+	MYSQL_ROW row;
+
+	list<string> list;
+	char DB_HOST[] = "localhost";
+	char DB_USER[] = "root";
+	char DB_PASS[] = "password";
+	char DB_NAME[] = "comon";
+
+
+	// DB 커넥션 연결
+	mysql_init(&connection);
+	conn = mysql_real_connect(&connection, DB_HOST, DB_USER, DB_PASS, DB_NAME, 3306, (char*)NULL, 0);
+	char sql[1024];
+
+	mysql_query(conn, "set session character_set_connection=euckr;");
+	mysql_query(conn, "set session character_set_results=euckr;");
+	mysql_query(conn, "set session character_set_client=euckr;");
+	strcpy_s(sql, query.c_str());
+
+	if (mysql_query(conn, sql) == 0) {
+		return 1;
+	}
+	return -1;
+}
+
+int resourceManagement::updateResource(string query) {
 	MYSQL* conn, connection;
 	MYSQL_RES* result;
 	MYSQL_ROW row;

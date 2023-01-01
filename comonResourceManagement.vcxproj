@@ -127,9 +127,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="historys.cpp" />
+    <ClCompile Include="mains.cpp" />
     <ClCompile Include="resource.cpp" />
     <ClCompile Include="systemInfo.cpp" />
-    <ClCompile Include="resourceDetail.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="createResource.h">
@@ -145,13 +146,19 @@
     <ClInclude Include="popUp_location.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="popUp_modify_classification.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="popUp_modify_resourceName.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="popUp_status.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="popUp_user.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="resourceDetail.h">
+    <ClInclude Include="resourceDetailPage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
@@ -168,14 +175,20 @@
     <EmbeddedResource Include="popUp_location.resx">
       <DependentUpon>popUp_location.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="popUp_modify_classification.resx">
+      <DependentUpon>popUp_modify_classification.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="popUp_modify_resourceName.resx">
+      <DependentUpon>popUp_modify_resourceName.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="popUp_status.resx">
       <DependentUpon>popUp_status.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="popUp_user.resx">
       <DependentUpon>popUp_user.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="resourceDetail.resx">
-      <DependentUpon>resourceDetail.h</DependentUpon>
+    <EmbeddedResource Include="resourceDetailPage.resx">
+      <DependentUpon>resourceDetailPage.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

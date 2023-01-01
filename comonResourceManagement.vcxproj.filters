@@ -15,20 +15,20 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="resourceDetail.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="systemInfo.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="resource.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="mains.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="historys.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="resourceDetail.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
     <ClInclude Include="functions.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -48,6 +48,15 @@
       <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="popUp_buyer.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="resourceDetailPage.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="popUp_modify_resourceName.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="popUp_modify_classification.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
   </ItemGroup>
