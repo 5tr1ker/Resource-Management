@@ -9,3 +9,12 @@ C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\x64\
 C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\x64\Debug\comonResourceManagement.resourceDetailPage.resources
 C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\x64\Debug\comonResourceManagement.popUp_modify_resourceName.resources
 C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\x64\Debug\comonResourceManagement.popUp_modify_classification.resources
+C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\x64\Debug\comonResourceManagement.popUp_modify_status.resources
+C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\x64\Debug\comonResourceManagement.popUp_modify_locate.resources
+C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\x64\Debug\comonResourceManagement.popUp_modify_user.resources
+C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\x64\Debug\comonResourceManagement.popUp_modify_buyer.resources
+C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\x64\Debug\comonResourceManagement.popUp_modify_purchaseDate.resources
+C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\x64\Debug\comonResourceManagement.popUp_modify_purchase.resources
+C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\x64\Debug\comonResourceManagement.formHistory.resources
+C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\x64\Debug\comonResourceManagement.resourceList.resources
+C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\x64\Debug\comonResourceManagement.resourceInfo.resources

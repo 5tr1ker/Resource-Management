@@ -127,16 +127,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="formHistory.cpp" />
     <ClCompile Include="historys.cpp" />
     <ClCompile Include="mains.cpp" />
+    <ClCompile Include="popUpresourceDetail.cpp" />
     <ClCompile Include="resource.cpp" />
+    <ClCompile Include="resourceInfo.cpp" />
     <ClCompile Include="systemInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="createResource.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="formHistory.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="functions.h" />
+    <ClInclude Include="popUpresourceDetail.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="popUp_buyer.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -146,10 +155,28 @@
     <ClInclude Include="popUp_location.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="popUp_modify_buyer.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="popUp_modify_classification.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="popUp_modify_locate.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="popUp_modify_purchase.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="popUp_modify_purchaseDate.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="popUp_modify_resourceName.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="popUp_modify_status.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="popUp_modify_user.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="popUp_status.h">
@@ -161,10 +188,19 @@
     <ClInclude Include="resourceDetailPage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="resourceInfo.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="resourceList.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="createResource.resx">
       <DependentUpon>createResource.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formHistory.resx">
+      <DependentUpon>formHistory.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="popUp_buyer.resx">
       <DependentUpon>popUp_buyer.h</DependentUpon>
@@ -175,11 +211,29 @@
     <EmbeddedResource Include="popUp_location.resx">
       <DependentUpon>popUp_location.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="popUp_modify_buyer.resx">
+      <DependentUpon>popUp_modify_buyer.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="popUp_modify_classification.resx">
       <DependentUpon>popUp_modify_classification.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="popUp_modify_locate.resx">
+      <DependentUpon>popUp_modify_locate.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="popUp_modify_purchase.resx">
+      <DependentUpon>popUp_modify_purchase.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="popUp_modify_purchaseDate.resx">
+      <DependentUpon>popUp_modify_purchaseDate.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="popUp_modify_resourceName.resx">
       <DependentUpon>popUp_modify_resourceName.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="popUp_modify_status.resx">
+      <DependentUpon>popUp_modify_status.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="popUp_modify_user.resx">
+      <DependentUpon>popUp_modify_user.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="popUp_status.resx">
       <DependentUpon>popUp_status.h</DependentUpon>
@@ -189,6 +243,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="resourceDetailPage.resx">
       <DependentUpon>resourceDetailPage.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resourceInfo.resx">
+      <DependentUpon>resourceInfo.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resourceList.resx">
+      <DependentUpon>resourceList.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

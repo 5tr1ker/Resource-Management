@@ -11,10 +11,11 @@ CREATE TABLE `comon`.`historys` (
   `etc` VARCHAR(45) ,
   PRIMARY KEY (`idhistorys`));
 */
-void resourceManagement::getHistory() {
+list<string> resourceManagement::getHistory() {
 	MYSQL* conn, connection;
 	MYSQL_RES* result;
 	MYSQL_ROW row;
+	list<string> resultList;
 
 	char DB_HOST[] = "localhost";
 	char DB_USER[] = "root";
@@ -25,17 +26,24 @@ void resourceManagement::getHistory() {
 	mysql_init(&connection);
 	conn = mysql_real_connect(&connection, DB_HOST, DB_USER, DB_PASS, DB_NAME, 3306, (char*)NULL, 0);
 	char sql[1024] = "select * from historys;";
+	mysql_query(conn, "set session character_set_connection=euckr;");
+	mysql_query(conn, "set session character_set_results=euckr;");
+	mysql_query(conn, "set session character_set_client=euckr;");
 
 	if (mysql_query(conn, sql) == 0) {
 		result = mysql_store_result(conn);
 		while ((row = mysql_fetch_row(result)) != NULL) {
-			cout << row[0] << " : " << row[1] << " : " << row[2] << endl;
+			for (int i = 1; i <= 6; i++) {
+				resultList.push_back(row[i]);
+			}
 		}
 		mysql_free_result(result);
 	}
 	else { // sql 실패
 		cerr << "SQL 문 실행에 실패했습니다.";
 	}
+
+	return resultList;
 }
 
 void resourceManagement::createHistory(string division, string classification, string content, string etc) {

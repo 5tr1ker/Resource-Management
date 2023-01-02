@@ -27,6 +27,15 @@
     <ClCompile Include="historys.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="formHistory.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="resourceInfo.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="popUpresourceDetail.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="functions.h">
@@ -57,6 +66,36 @@
       <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="popUp_modify_classification.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="popUp_modify_status.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="popUp_modify_locate.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="popUp_modify_user.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="popUp_modify_buyer.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="popUp_modify_purchaseDate.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="popUp_modify_purchase.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="formHistory.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="resourceList.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="resourceInfo.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="popUpresourceDetail.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
   </ItemGroup>

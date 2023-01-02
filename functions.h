@@ -8,7 +8,7 @@
 #include <mysql.h>
 #include<vector>
 #include <list>
-
+#include <msclr\marshal_cppstd.h>
 
 using namespace std;
 
@@ -26,6 +26,16 @@ public:
 	string where_purchase;
 	string first_purchase;
 	string price;
+};
+
+class history {
+public:
+	string manager;
+	string process_date;
+	string division;
+	string classification;
+	string content;
+	string etc;
 };
 
 class resourceManagement {
@@ -51,16 +61,17 @@ public:
 	vector<string> getGPU();
 	string getOSUUID();
 	map<string, vector<string>> getInstalledSoftware();
+	void updateModifyDate(string ulid);
 	// 자산 분류
 	string createULID();
 	int createResource(string ulid, string  images, string  resource, string  classification, string  status, string  location, string  user, string  buyer, string  purchaseDate, string price);
 	void getTotalResourceCount();
 	resourceData getDetailResource(const char* ulid);
 	void getAllResource(int limit, int page);
-	void searchResource(const char* item, const char* search, int limit, int page);
+	list<string> searchResource(const char* item, const char* search, int limit, int page);
 	void modifiyResource(const char* ulid, const char* item, const char* data);
 	// 히스토리
-	void getHistory();
+	list<string> getHistory();
 	void createHistory(string division, string classification, string content, string etc);
 
 };

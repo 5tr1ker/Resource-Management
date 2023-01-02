@@ -198,10 +198,11 @@ void resourceManagement::getAllResource(int limit, int page) {
 	}
 }
 
-void resourceManagement::searchResource(const char* item, const char* search, int limit, int page) {
+list<string> resourceManagement::searchResource(const char* item, const char* search, int limit, int page) {
 	MYSQL* conn, connection;
 	MYSQL_RES* result;
 	MYSQL_ROW row;
+	list<string> lists;
 
 	char DB_HOST[] = "localhost";
 	char DB_USER[] = "root";
@@ -213,21 +214,33 @@ void resourceManagement::searchResource(const char* item, const char* search, in
 	conn = mysql_real_connect(&connection, DB_HOST, DB_USER, DB_PASS, DB_NAME, 3306, (char*)NULL, 0);
 	char sql[1024];
 
+	mysql_query(conn, "set session character_set_connection=euckr;");
+	mysql_query(conn, "set session character_set_results=euckr;");
+	mysql_query(conn, "set session character_set_client=euckr;");
+
 	string queryPaging = " limit " + to_string(limit) + " offset " + to_string(limit * (page - 1)) + ";";
-	string querySearch = " where " + string(item) + " like '%" + string(search) + "%'";
+	string querySearch = "";
+	
+	if(string(item).size() > 0 ) querySearch = " where " + string(item) + " like '%" + string(search) + "%'";
 	string query = "SELECT image , ulid , resourcename , classification , status , user , location from resource_details" + querySearch + queryPaging;
 	strcpy_s(sql, query.c_str());
 
+	cout << sql << endl;
 	if (mysql_query(conn, sql) == 0) {
 		result = mysql_store_result(conn);
 		while ((row = mysql_fetch_row(result)) != NULL) {
-			cout << row[0] << " : " << row[1] << " : " << row[2] << " : " << row[3] << " : " << row[4] << endl;
+			for (int i = 0; i <= 6; i++) {
+				if (row[i] == NULL) lists.push_back("");
+				else lists.push_back(row[i]);
+			}
 		}
 		mysql_free_result(result);
 	}
 	else { // sql 실패
 		cerr << "SQL 문 실행에 실패했습니다.";
 	}
+
+	return lists;
 }
 
 void resourceManagement::modifiyResource(const char* ulid, const char* item, const char* data) {
@@ -549,4 +562,36 @@ int resourceManagement::updateResource(string query) {
 		return 1;
 	}
 	return -1;
+}
+
+void resourceManagement::updateModifyDate(string ulid) {
+	MYSQL* conn, connection;
+	MYSQL_RES* result;
+	MYSQL_ROW row;
+
+	time_t timer = time(NULL);
+	struct tm* t = localtime(&timer);
+
+	char DB_HOST[] = "localhost";
+	char DB_USER[] = "root";
+	char DB_PASS[] = "password";
+	char DB_NAME[] = "comon";
+
+
+	// DB 커넥션 연결
+	mysql_init(&connection);
+	conn = mysql_real_connect(&connection, DB_HOST, DB_USER, DB_PASS, DB_NAME, 3306, (char*)NULL, 0);
+	char sql[1024];
+
+	string times = msclr::interop::marshal_as<std::string>((t->tm_year + 1900) + "/" + (t->tm_mon + 1) + "/" + t->tm_mday + " " + t->tm_hour + ":" + t->tm_min + ":" + t->tm_sec);
+	string query = "UPDATE `comon`.`resource_details` SET `modify_date` = '" + times + "' WHERE (`ulid` = '" + ulid + "');";
+
+	mysql_query(conn, "set session character_set_connection=euckr;");
+	mysql_query(conn, "set session character_set_results=euckr;");
+	mysql_query(conn, "set session character_set_client=euckr;");
+	strcpy_s(sql, query.c_str());
+
+	if (mysql_query(conn, sql) != 0) {
+		cerr << "SQL 문 실행에 실패했습니다.";
+	}
 }
