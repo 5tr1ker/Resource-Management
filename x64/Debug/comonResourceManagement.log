@@ -1,4 +1,3 @@
-﻿  mains.cpp
-C:\Users\tjseo\source\repos\comonResourceManagement\comonResourceManagement\resourceList.h(409,6): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  formHistory.obj : MSIL 모듈이 발견되었습니다. MSIL에 증분 링크를 사용할 수 없습니다. 전체 링크를 수행하고 있습니다.
+﻿  main.cpp
+  main.obj : MSIL 모듈이 발견되었습니다. MSIL에 증분 링크를 사용할 수 없습니다. 전체 링크를 수행하고 있습니다.
   comonResourceManagement.vcxproj -> C:\Users\tjseo\source\repos\comonResourceManagement\x64\Debug\comonResourceManagement.exe

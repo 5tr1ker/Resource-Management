@@ -15,25 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
     <ClCompile Include="systemInfo.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="resource.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="mains.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="historys.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="formHistory.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="resourceInfo.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="popUpresourceDetail.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,61 +26,7 @@
     <ClInclude Include="functions.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="createResource.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="popUp_classification.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="popUp_status.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="popUp_location.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="popUp_user.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="popUp_buyer.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="resourceDetailPage.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="popUp_modify_resourceName.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="popUp_modify_classification.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="popUp_modify_status.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="popUp_modify_locate.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="popUp_modify_user.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="popUp_modify_buyer.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="popUp_modify_purchaseDate.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="popUp_modify_purchase.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="formHistory.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="resourceList.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
     <ClInclude Include="resourceInfo.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="popUpresourceDetail.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
   </ItemGroup>

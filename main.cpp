@@ -1,9 +1,5 @@
-#include "resourceDetailPage.h"
-#include "createResource.h"
-#include "functions.h"
-#include "formHistory.h"
+Ôªø#include "functions.h"
 #include "resourceInfo.h"
-#include "resourceList.h"
 
 using namespace System;
 using namespace System::Windows::Forms;
@@ -11,6 +7,6 @@ using namespace System::Windows::Forms;
 void main() {
 	Application::SetCompatibleTextRenderingDefault(false);
 	Application::EnableVisualStyles();
-	comonResourceManagement::resourceInfo form;	// Project1 - ∫ª¿Œ «¡∑Œ¡ß∆Æ ¿Ã∏ß
+	comonResourceManagement::resourceInfo form;
 	Application::Run(% form);
 }

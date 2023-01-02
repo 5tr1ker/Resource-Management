@@ -1,4 +1,4 @@
-#include "functions.h"
+ï»¿#include "functions.h"
 #define BUFF_SIZE 1024
 
 bool checkAlpha(string str) {
@@ -19,12 +19,12 @@ std::string resourceManagement::GetProcessorName()
     long result = 0;
     DWORD c_size = sizeof(Cpu_info);
 
-    //·¹Áö½ºÆ®¸®¸¦ Á¶»çÇÏ¿© ÇÁ·Î¼¼¼­ÀÇ ¸ğµ¨¸íÀ» ¾ò¾î³À´Ï´Ù.
+    //ë ˆì§€ìŠ¤íŠ¸ë¦¬ë¥¼ ì¡°ì‚¬í•˜ì—¬ í”„ë¡œì„¸ì„œì˜ ëª¨ë¸ëª…ì„ ì–»ì–´ëƒ…ë‹ˆë‹¤.
     RegOpenKeyEx(HKEY_LOCAL_MACHINE, L"Hardware\\Description\\System\\CentralProcessor\\0", 0, KEY_QUERY_VALUE, &hKey);
     RegQueryValueEx(hKey, L"ProcessorNameString", NULL, NULL, (LPBYTE)Cpu_info, &c_size);
     RegCloseKey(hKey);
 
-    //GetSystemInfo ÇÔ¼ö¸¦ ÀÌ¿ëÇØ ³í¸®Àû ÄÚ¾î °³¼ö¸¦ ¾ò¾î³À´Ï´Ù.
+    //GetSystemInfo í•¨ìˆ˜ë¥¼ ì´ìš©í•´ ë…¼ë¦¬ì  ì½”ì–´ ê°œìˆ˜ë¥¼ ì–»ì–´ëƒ…ë‹ˆë‹¤.
     /*
     wchar_t num[8];
     SYSTEM_INFO systemInfo;
@@ -47,7 +47,7 @@ std::string resourceManagement::getBaseBoard() {
     long result = 0;
     DWORD c_size = sizeof(BaseBoard_info);
 
-    //·¹Áö½ºÆ®¸®¸¦ Á¶»çÇÏ¿© ÇÁ·Î¼¼¼­ÀÇ ¸ğµ¨¸íÀ» ¾ò¾î³À´Ï´Ù.
+    //ë ˆì§€ìŠ¤íŠ¸ë¦¬ë¥¼ ì¡°ì‚¬í•˜ì—¬ í”„ë¡œì„¸ì„œì˜ ëª¨ë¸ëª…ì„ ì–»ì–´ëƒ…ë‹ˆë‹¤.
     RegOpenKeyEx(HKEY_LOCAL_MACHINE, L"Hardware\\Description\\System\\BIOS", 0, KEY_QUERY_VALUE, &hKey);
     if (RegQueryValueEx(hKey, L"BaseBoardManufacturer", NULL, NULL, (LPBYTE)BaseBoard_info, &c_size) != ERROR_SUCCESS)
     {
@@ -85,7 +85,7 @@ std::string resourceManagement::GetOSName()
 
     DWORD c_size = 100;
 
-    //·¹Áö½ºÆ®¸®¸¦ Á¶»çÇÏ¿© ¿î¿µÃ¼Á¦ ÀÌ¸§À» Á¶»çÇÕ´Ï´Ù.
+    //ë ˆì§€ìŠ¤íŠ¸ë¦¬ë¥¼ ì¡°ì‚¬í•˜ì—¬ ìš´ì˜ì²´ì œ ì´ë¦„ì„ ì¡°ì‚¬í•©ë‹ˆë‹¤.
     if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, L"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", 0, KEY_READ, &hKey) != ERROR_SUCCESS)
     {
         return "Fail to Open OS_info";
@@ -198,7 +198,7 @@ string RunCommand(char* command) {
     fp = _popen(command, "r");
     if (NULL == fp)
     {
-        perror("popen() ½ÇÆĞ");
+        perror("popen() ì‹¤íŒ¨");
         return NULL;
     }
 
@@ -242,7 +242,7 @@ list<string> resourceManagement::getHDD() {
 vector<string> resourceManagement::getGPU() {
     char cmd[] = "wmic path win32_VideoController get name";
     string gpu = RunCommand(cmd);
-    string result = gpu.substr(6); // Model ¹®±¸ Á¦°Å
+    string result = gpu.substr(6); // Model ë¬¸êµ¬ ì œê±°
     int npos = result.find_first_not_of(' ');
     result.erase(0, npos + 2);
 
@@ -267,13 +267,13 @@ vector<string> resourceManagement::getGPU() {
 string resourceManagement::getOSUUID() {
     char cmd[] = "wmic csproduct get uuid";
     string gpu = RunCommand(cmd);
-    string result = gpu.substr(5); // UUID ¹®±¸ Á¦°Å
+    string result = gpu.substr(5); // UUID ë¬¸êµ¬ ì œê±°
     int npos = result.find_first_not_of(' ');
 
     return result.erase(0, npos + 2);;
 }
 
-void findSoftware(const char* command , vector<string> *vector) {
+void findSoftware(const char* command, vector<string>* vector) {
     char  buff[BUFF_SIZE];
     FILE* fp;
     string result;
@@ -281,7 +281,7 @@ void findSoftware(const char* command , vector<string> *vector) {
     fp = _popen(command, "r");
     if (NULL == fp)
     {
-        perror("popen() ½ÇÆĞ");
+        perror("popen() ì‹¤íŒ¨");
     }
 
     while (fgets(buff, BUFF_SIZE, fp)) {
@@ -289,12 +289,12 @@ void findSoftware(const char* command , vector<string> *vector) {
     }
 }
 
-map<string , vector<string>> resourceManagement::getInstalledSoftware() { // , version, vendor
+map<string, vector<string>> resourceManagement::getInstalledSoftware() { // , version, vendor
     vector<string> result_name;
     vector<string> result_vendor;
     vector<string> result_version;
 
-    findSoftware("wmic product get name" , &result_name);
+    findSoftware("wmic product get name", &result_name);
     findSoftware("wmic product get vendor", &result_vendor);
     findSoftware("wmic product get version", &result_version);
 
@@ -314,7 +314,7 @@ map<string , vector<string>> resourceManagement::getInstalledSoftware() { // , v
 * 1073741824Byte = 1GB
 */
 list<string> resourceManagement::getMemory() {
-    char cmd[] = "wmic memorychip get manufacturer , Capacity , SMBIOSMemoryType , partNumber"; // ¸Ş¸ğ¸® ¿ë·®°ú DDR Å¸ÀÔ °¡Á®¿À±â  , partNumber
+    char cmd[] = "wmic memorychip get manufacturer , Capacity , SMBIOSMemoryType , partNumber"; // ë©”ëª¨ë¦¬ ìš©ëŸ‰ê³¼ DDR íƒ€ì… ê°€ì ¸ì˜¤ê¸°  , partNumber
     //string result = "Capacity   manufacturer   PartNumber  SMBIOSMemoryType\n  8589934592  samsung  ABCABC  26\n  8589934592  samsung   ABCABC  26";
     string result = RunCommand(cmd);
 
@@ -336,7 +336,7 @@ list<string> resourceManagement::getMemory() {
         }
     }
 
-    // ¸¶Áö¸· ³²Àº ¹®ÀÚ Ãß°¡
+    // ë§ˆì§€ë§‰ ë‚¨ì€ ë¬¸ì ì¶”ê°€
     str.erase(str.find_last_not_of(" \n\r\t") + 1);
     if (str.size() != 0) {
         vector.push_back(str);
@@ -348,7 +348,7 @@ list<string> resourceManagement::getMemory() {
         string manufacture = vector.at(i + 1);
         i++;
         string partNumber;
-        if (!checkAlpha(vector[i + 1])) { // part ¹øÈ£°¡ Á¸ÀçÇÒ ¶§
+        if (!checkAlpha(vector[i + 1])) { // part ë²ˆí˜¸ê°€ ì¡´ì¬í•  ë•Œ
             partNumber = vector.at(i + 1);
             i++;
         }
@@ -356,8 +356,8 @@ list<string> resourceManagement::getMemory() {
         code.erase(code.find_last_not_of(" \n\r\t") + 1);
 
         string afterCode;
-        memorySize = memorySize.substr(0, memorySize.length() - 9) + "GB"; // ¸Ş¸ğ¸® ÀüÃ¼Å©±â
-        for (int i = 0; i < memorySize.size(); i++) { // °³Çà¹®ÀÚ Á¦°Å
+        memorySize = memorySize.substr(0, memorySize.length() - 9) + "GB"; // ë©”ëª¨ë¦¬ ì „ì²´í¬ê¸°
+        for (int i = 0; i < memorySize.size(); i++) { // ê°œí–‰ë¬¸ì ì œê±°
             if (memorySize[i] > 14) break;
             else memorySize[i] = ' ';
         }
@@ -391,7 +391,7 @@ CREATE TABLE `comon`.`system_infos` (
   `uuid` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`ulid`));
 */
-void resourceManagement::updateSystemInfo() {
+void resourceManagement::updateSystemInfo(string id) {
     MYSQL* conn, connection;
     MYSQL_ROW row;
 
@@ -400,12 +400,12 @@ void resourceManagement::updateSystemInfo() {
     char DB_PASS[] = "password";
     char DB_NAME[] = "comon";
 
-    // DB Ä¿³Ø¼Ç ¿¬°á
+    // DB ì»¤ë„¥ì…˜ ì—°ê²°
     mysql_init(&connection);
     conn = mysql_real_connect(&connection, DB_HOST, DB_USER, DB_PASS, DB_NAME, 3306, (char*)NULL, 0);
     char sql[1024];
 
-    // System Á¤º¸ °¡Á®¿Í Äõ¸® ¸¸µé±â
+    // System ì •ë³´ ê°€ì ¸ì™€ ì¿¼ë¦¬ ë§Œë“¤ê¸°
     string query = "INSERT INTO `comon`.`system_infos` (`ulid`, `os`, `cpu`, `baseboard`, `uuid` ";
     string last_query;
     list<string> hddList = getHDD();
@@ -428,12 +428,12 @@ void resourceManagement::updateSystemInfo() {
         last_query = last_query + ", '" + str + "' ";
         i++;
     }
-    query += ") VALUES ('1' , '" + GetOSName() + "' , '" + GetProcessorName() + "' , '" + getBaseBoard() + "' , '" + getOSUUID() + "' " + last_query + ");";
+    query += ") VALUES ('" + id + "' , '" + GetOSName() + "' , '" + GetProcessorName() + "' , '" + getBaseBoard() + "' , '" + getOSUUID() + "' " + last_query + ");";
 
-    // ÀÛ¼ºµÈ Äõ¸®¸¦ DB¿¡ ÀúÀåÇÏ±â
+    // ì‘ì„±ëœ ì¿¼ë¦¬ë¥¼ DBì— ì €ì¥í•˜ê¸°
     strcpy_s(sql, query.c_str());
     if (mysql_query(conn, sql) != 0) {
-        cout << "systemInfo.cpp ÆÄÀÏ¿¡¼­ ¿À·ù ¹ß»ı!";
+        cout << "systemInfo.cpp íŒŒì¼ì—ì„œ ì˜¤ë¥˜ ë°œìƒ!";
     }
 
     mysql_close(conn);
@@ -448,7 +448,7 @@ CREATE TABLE `comon`.`software_infos` (
   `software_infos_key` INT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`software_infos_key`));
 */
-void resourceManagement::updateSoftwareInfo() {
+void resourceManagement::updateSoftwareInfo(string id) {
     MYSQL* conn, connection;
     MYSQL_ROW row;
 
@@ -457,13 +457,13 @@ void resourceManagement::updateSoftwareInfo() {
     char DB_PASS[] = "password";
     char DB_NAME[] = "comon";
 
-    // DB Ä¿³Ø¼Ç ¿¬°á
+    // DB ì»¤ë„¥ì…˜ ì—°ê²°
     mysql_init(&connection);
     conn = mysql_real_connect(&connection, DB_HOST, DB_USER, DB_PASS, DB_NAME, 3306, (char*)NULL, 0);
     char sql[1024];
 
-    // query ÀÛ¼º
-    // ÇÑ±ÛÀÌ Æ÷ÇÔµÇ¾î ÀÖÀ» ¶§¸¦ À§ÇØ »ç¿ë
+    // query ì‘ì„±
+    // í•œê¸€ì´ í¬í•¨ë˜ì–´ ìˆì„ ë•Œë¥¼ ìœ„í•´ ì‚¬ìš©
     mysql_query(conn, "set session character_set_connection=euckr;");
     mysql_query(conn, "set session character_set_results=euckr;");
     mysql_query(conn, "set session character_set_client=euckr;");
@@ -479,13 +479,13 @@ void resourceManagement::updateSoftwareInfo() {
         }
         string vendor = softwareVendor[i];
         string version = softwareVersion[i];
-        query = "INSERT INTO `comon`.`software_infos` (`ulid` , `name` , `vendor` , `version`) VALUES ('1' , '" + name + "' , '" + vendor + "' , '" + version + "');";
+        query = "INSERT INTO `comon`.`software_infos` (`ulid` , `name` , `vendor` , `version`) VALUES ('" + id + "' , '" + name + "' , '" + vendor + "' , '" + version + "');";
         i += 2;
 
         strcpy_s(sql, query.c_str());
 
         if (mysql_query(conn, sql) != 0) {
-            cout << "¿À·ù Äõ¸® : " << sql << endl;
+            cout << "ì˜¤ë¥˜ ì¿¼ë¦¬ : " << sql << endl;
         }
     }
 
@@ -502,13 +502,13 @@ void resourceManagement::getSoftwareInfo(const char* ulid) {
     char DB_PASS[] = "password";
     char DB_NAME[] = "comon";
 
-    // DB Ä¿³Ø¼Ç ¿¬°á
+    // DB ì»¤ë„¥ì…˜ ì—°ê²°
     mysql_init(&connection);
     conn = mysql_real_connect(&connection, DB_HOST, DB_USER, DB_PASS, DB_NAME, 3306, (char*)NULL, 0);
     char sql[1024];
 
-    // query ÀÛ¼º
-    // ÇÑ±ÛÀÌ Æ÷ÇÔµÇ¾î ÀÖÀ» ¶§¸¦ À§ÇØ »ç¿ë
+    // query ì‘ì„±
+    // í•œê¸€ì´ í¬í•¨ë˜ì–´ ìˆì„ ë•Œë¥¼ ìœ„í•´ ì‚¬ìš©
     mysql_query(conn, "set session character_set_connection=euckr;");
     mysql_query(conn, "set session character_set_results=euckr;");
     mysql_query(conn, "set session character_set_client=euckr;");
@@ -524,8 +524,8 @@ void resourceManagement::getSoftwareInfo(const char* ulid) {
         }
         mysql_free_result(result);
     }
-    else { // sql ½ÇÆĞ
-        cerr << "SQL ¹® ½ÇÇà¿¡ ½ÇÆĞÇß½À´Ï´Ù.";
+    else { // sql ì‹¤íŒ¨
+        cerr << "SQL ë¬¸ ì‹¤í–‰ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.";
     }
 }
 
@@ -539,7 +539,7 @@ void resourceManagement::getSystemInfo(const char* ulid) {
     char DB_PASS[] = "password";
     char DB_NAME[] = "comon";
 
-    // DB Ä¿³Ø¼Ç ¿¬°á
+    // DB ì»¤ë„¥ì…˜ ì—°ê²°
     mysql_init(&connection);
     conn = mysql_real_connect(&connection, DB_HOST, DB_USER, DB_PASS, DB_NAME, 3306, (char*)NULL, 0);
     char sql[1024];
@@ -553,7 +553,7 @@ void resourceManagement::getSystemInfo(const char* ulid) {
         while ((row = mysql_fetch_row(result)) != NULL) {
             cout << row[0] << row[1];
             if (row[6] == NULL) {
-                cout << "NuLL °ª ÀÌ¶ó´Ï ¤Ì¤Ì" << endl;
+                cout << "NuLL ê°’ ì´ë¼ë‹ˆ ã…œã…œ" << endl;
             }
         }
         mysql_free_result(result);

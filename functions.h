@@ -40,17 +40,9 @@ public:
 
 class resourceManagement {
 public:
-	// 소프트웨어 팝업 정보
-	list<string> getClassificationList();
-	list<string> getStatusList();
-	list<string> getLocationList();
-	list<string> getUserList();
-	list<string> getBuyerList();
-	int createNewList(string query);
-	int updateResource(string query);
 	// 소프트웨어 정보
-	void updateSystemInfo();
-	void updateSoftwareInfo();
+	void updateSystemInfo(string id);
+	void updateSoftwareInfo(string id);
 	void getSoftwareInfo(const char* ulid);
 	void getSystemInfo(const char* ulid);
 	string GetProcessorName();
@@ -61,19 +53,6 @@ public:
 	vector<string> getGPU();
 	string getOSUUID();
 	map<string, vector<string>> getInstalledSoftware();
-	void updateModifyDate(string ulid);
-	// 자산 분류
-	string createULID();
-	int createResource(string ulid, string  images, string  resource, string  classification, string  status, string  location, string  user, string  buyer, string  purchaseDate, string price);
-	void getTotalResourceCount();
-	resourceData getDetailResource(const char* ulid);
-	void getAllResource(int limit, int page);
-	list<string> searchResource(const char* item, const char* search, int limit, int page);
-	void modifiyResource(const char* ulid, const char* item, const char* data);
-	// 히스토리
-	list<string> getHistory();
-	void createHistory(string division, string classification, string content, string etc);
-
 };
 
 #endif
