@@ -4,8 +4,6 @@
 #include<iostream>
 #include<string>
 #include<Windows.h>
-#pragma comment(lib , "libmySQL.lib")
-#include <mysql.h>
 #include<vector>
 #include <list>
 #include <msclr\marshal_cppstd.h>

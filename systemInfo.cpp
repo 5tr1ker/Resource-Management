@@ -682,6 +682,7 @@ string resourceManagement::createDataJson(string id, vector<resourceData> result
         softwareRoot.append(piece);
     }
 
+    root["ulid"] = id;
     root["software"] = softwareRoot;
     root["hardware"] = hardwareroot;
     string resultdata = writer.write(root);
