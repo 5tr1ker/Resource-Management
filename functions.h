@@ -22,10 +22,11 @@ public:
 class resourceManagement {
 public:
 	// 소프트웨어 정보
-	void updateSystemInfo(string id);
-	void updateSoftwareInfo(string id , vector<resourceData> result);
-	void getSoftwareInfo(const char* ulid);
-	void getSystemInfo(const char* ulid);
+	//string updateSystemInfo(string id);
+	//string updateSoftwareInfo(string id , vector<resourceData> result);
+	string createDataJson(string id, vector<resourceData> result);
+	//void getSoftwareInfo(const char* ulid);
+	//void getSystemInfo(const char* ulid);
 	string GetProcessorName();
 	string getBaseBoard();
 	string GetOSName();

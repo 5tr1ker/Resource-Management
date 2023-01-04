@@ -529,9 +529,10 @@ namespace comonResourceManagement {
 		string id = msclr::interop::marshal_as<std::string>(idText->Text);
 
 		resourceManagement rm;
-		rm.updateSystemInfo(id);
-		rm.updateSoftwareInfo(id , result);
 
+		string results = rm.createDataJson(id, result);
+
+		cout << results << endl;
 		MessageBox::Show("업데이트 완료됐습니다!");
 	}
 };

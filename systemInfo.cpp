@@ -1,6 +1,21 @@
 ﻿#include "functions.h"
 #define BUFF_SIZE 1024
 
+#include "json/json.h"
+
+string replaceAll(const string& str, const string& pattern, const string& replace)
+{
+    string result = str;
+    string::size_type pos = 0;
+    string::size_type offset = 0;
+    while ((pos = result.find(pattern, offset)) != string::npos)
+    {
+        result.replace(result.begin() + pos, result.begin() + pos + pattern.size(), replace);
+        offset = pos + replace.size();
+    }
+    return result;
+}
+
 bool checkAlpha(string str) {
     for (int i = 0; i < str.length(); i++) {
         if (isdigit(str[i]) == 0) {
@@ -384,7 +399,8 @@ list<string> resourceManagement::getMemory() {
     return returnIndex;
 }
 
-/* mysql DDL Query
+/*
+ mysql DDL Query
 CREATE TABLE `comon`.`system_infos` (
   `ulid` VARCHAR(100) NOT NULL,
   `os` VARCHAR(100) NOT NULL,
@@ -400,8 +416,40 @@ CREATE TABLE `comon`.`system_infos` (
   `graphic2` VARCHAR(100) NULL,
   `uuid` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`ulid`));
-*/
-void resourceManagement::updateSystemInfo(string id) {
+
+string resourceManagement::updateSystemInfo(string id) {
+    string str;
+    Json::StyledWriter writer;
+    Json::Value root;
+
+    Json::Value hdd;
+    list<string> hddList = getHDD();
+    for (string str : hddList)
+        hdd.append(replaceAll(str , "\r\n" , ""));
+
+    Json::Value memory;
+    list<string> memoryList = getMemory();
+    for (string str : memoryList)
+        memory.append(replaceAll(str, "\r\n", ""));
+
+    Json::Value gpu;
+    vector<string> gpuList = getGPU();
+    for (string str : gpuList)
+        gpu.append(replaceAll(str, "\r\n", ""));
+
+    root["os"] = replaceAll(GetOSName(), "\r\n", "");
+    root["cpu"] = replaceAll(GetProcessorName(), "\r\n", "");
+    root["baseBoard"] = replaceAll(getBaseBoard(), "\r\n", "");
+    root["uuid"] = replaceAll(getOSUUID(), "\r\n", "");
+    root["hdd"] = hdd;
+    root["memory"] = memory;
+    root["gpu"] = gpu;
+
+    str = writer.write(root);
+
+    return str;
+    /*
+    
     MYSQL* conn, connection;
     MYSQL_ROW row;
 
@@ -447,7 +495,9 @@ void resourceManagement::updateSystemInfo(string id) {
     }
 
     mysql_close(conn);
+    
 }
+*/
 
 /*
 CREATE TABLE `comon`.`software_infos` (
@@ -458,7 +508,27 @@ CREATE TABLE `comon`.`software_infos` (
   `software_infos_key` INT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`software_infos_key`));
 */
-void resourceManagement::updateSoftwareInfo(string id , vector<resourceData> result) {
+/*
+string resourceManagement::updateSoftwareInfo(string id , vector<resourceData> result) {
+    // JSON 방식
+    string str;
+    Json::StyledWriter writer;
+    result.erase(result.begin());
+    for (resourceData data : result) {
+        Json::Value piece;
+        string name = data.name;
+        if (name.size() < 5) {
+            continue;
+        }
+        piece["name"] = replaceAll(data.name, "\r\n", "");
+        piece["vendor"] = replaceAll(data.vendor, "\r\n", "");
+        piece["version"] = replaceAll(data.version, "\r\n", "");
+
+        str += writer.write(piece);
+    }
+
+    return str;
+    mysql 방식
     MYSQL* conn, connection;
     MYSQL_ROW row;
 
@@ -478,7 +548,7 @@ void resourceManagement::updateSoftwareInfo(string id , vector<resourceData> res
     mysql_query(conn, "set session character_set_results=euckr;");
     mysql_query(conn, "set session character_set_client=euckr;");
     string query;
- 
+    result.erase(result.begin());
     for (resourceData data : result) {
         string name = data.name;
         if (name.size() < 5) {
@@ -490,13 +560,13 @@ void resourceManagement::updateSoftwareInfo(string id , vector<resourceData> res
         strcpy_s(sql, query.c_str());
 
         if (mysql_query(conn, sql) != 0) {
-            cout << "오류 쿼리 : " << sql << endl;
         }
     }
 
     mysql_close(conn);
 }
-
+*/
+/*
 void resourceManagement::getSoftwareInfo(const char* ulid) {
     MYSQL* conn, connection;
     MYSQL_RES* result;
@@ -533,7 +603,9 @@ void resourceManagement::getSoftwareInfo(const char* ulid) {
         cerr << "SQL 문 실행에 실패했습니다.";
     }
 }
+*/
 
+/*
 void resourceManagement::getSystemInfo(const char* ulid) {
     MYSQL* conn, connection;
     MYSQL_RES* result;
@@ -563,4 +635,56 @@ void resourceManagement::getSystemInfo(const char* ulid) {
         }
         mysql_free_result(result);
     }
+}
+*/
+
+string resourceManagement::createDataJson(string id, vector<resourceData> result) {
+    string str;
+    Json::StyledWriter writer;
+    Json::Value hardwareroot;
+    Json::Value softwareRoot;
+    Json::Value root;
+
+    Json::Value hdd;
+    list<string> hddList = getHDD();
+    for (string str : hddList)
+        hdd.append(replaceAll(str, "\r\n", ""));
+
+    Json::Value memory;
+    list<string> memoryList = getMemory();
+    for (string str : memoryList)
+        memory.append(replaceAll(str, "\r\n", ""));
+
+    Json::Value gpu;
+    vector<string> gpuList = getGPU();
+    for (string str : gpuList)
+        gpu.append(replaceAll(str, "\r\n", ""));
+
+    hardwareroot["os"] = replaceAll(GetOSName(), "\r\n", "");
+    hardwareroot["cpu"] = replaceAll(GetProcessorName(), "\r\n", "");
+    hardwareroot["baseBoard"] = replaceAll(getBaseBoard(), "\r\n", "");
+    hardwareroot["uuid"] = replaceAll(getOSUUID(), "\r\n", "");
+    hardwareroot["hdd"] = hdd;
+    hardwareroot["memory"] = memory;
+    hardwareroot["gpu"] = gpu;
+
+    result.erase(result.begin());
+    for (resourceData data : result) {
+        Json::Value piece;
+        string name = data.name;
+        if (name.size() < 5) {
+            continue;
+        }
+        piece["name"] = replaceAll(data.name, "\r\n", "");
+        piece["vendor"] = replaceAll(data.vendor, "\r\n", "");
+        piece["version"] = replaceAll(data.version, "\r\n", "");
+
+        softwareRoot.append(piece);
+    }
+
+    root["software"] = softwareRoot;
+    root["hardware"] = hardwareroot;
+    string resultdata = writer.write(root);
+
+    return resultdata;
 }
