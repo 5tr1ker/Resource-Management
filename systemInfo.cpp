@@ -273,36 +273,46 @@ string resourceManagement::getOSUUID() {
     return result.erase(0, npos + 2);;
 }
 
-void findSoftware(const char* command, vector<string>* vector) {
+vector<resourceData> resourceManagement::findSoftware() {
     char  buff[BUFF_SIZE];
     FILE* fp;
-    string result;
+    vector<resourceData> data;
 
-    fp = _popen(command, "r");
+    fp = _popen("wmic product get name , vendor , version" , "r");
     if (NULL == fp)
     {
         perror("popen() 실패");
     }
 
+    vector<string> tmp;
     while (fgets(buff, BUFF_SIZE, fp)) {
-        vector->push_back(buff);
+        string str = "";
+        for (int i = 0; buff[i] != EOF; i++) {
+            str += buff[i];
+            if (buff[i] == ' ') {
+                if (buff[i] != EOF && buff[i + 1] == ' ' && buff[i + 2] != 'x') {
+                    if (str != " ") tmp.push_back(str);
+                    str = "";
+                    while (buff[i + 1] != ' ' && buff[i] != EOF) {
+                        i++;
+                    }
+                }
+            }
+        }
+
+        resourceData newRd;
+        int stackSize = tmp.size() - 1;
+        if (stackSize < 2) continue;
+        newRd.version = tmp[stackSize--];
+        newRd.vendor = tmp[stackSize--];
+        for (int i = stackSize; i >= 0; i--) {
+            newRd.name = tmp[i] + newRd.name;
+        }
+        tmp.clear();
+        data.push_back(newRd);
     }
-}
 
-map<string, vector<string>> resourceManagement::getInstalledSoftware() { // , version, vendor
-    vector<string> result_name;
-    vector<string> result_vendor;
-    vector<string> result_version;
-
-    findSoftware("wmic product get name", &result_name);
-    findSoftware("wmic product get vendor", &result_vendor);
-    findSoftware("wmic product get version", &result_version);
-
-    map<string, vector<string>> result;
-    result.insert(make_pair("name", result_name));
-    result.insert(make_pair("vendor", result_vendor));
-    result.insert(make_pair("version", result_version));
-    return result;
+    return data;
 }
 
 /*
@@ -448,7 +458,7 @@ CREATE TABLE `comon`.`software_infos` (
   `software_infos_key` INT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`software_infos_key`));
 */
-void resourceManagement::updateSoftwareInfo(string id) {
+void resourceManagement::updateSoftwareInfo(string id , vector<resourceData> result) {
     MYSQL* conn, connection;
     MYSQL_ROW row;
 
@@ -468,20 +478,15 @@ void resourceManagement::updateSoftwareInfo(string id) {
     mysql_query(conn, "set session character_set_results=euckr;");
     mysql_query(conn, "set session character_set_client=euckr;");
     string query;
-    map<string, vector<string>> softwareList = getInstalledSoftware();
-    vector<string> softwareName = softwareList["name"];
-    vector<string> softwareVendor = softwareList["vendor"];
-    vector<string> softwareVersion = softwareList["version"];
-    for (int i = 1; i < softwareName.size(); i++) {
-        string name = softwareName[i];
+ 
+    for (resourceData data : result) {
+        string name = data.name;
         if (name.size() < 5) {
             continue;
         }
-        string vendor = softwareVendor[i];
-        string version = softwareVersion[i];
+        string vendor = data.vendor;
+        string version = data.version;
         query = "INSERT INTO `comon`.`software_infos` (`ulid` , `name` , `vendor` , `version`) VALUES ('" + id + "' , '" + name + "' , '" + vendor + "' , '" + version + "');";
-        i += 2;
-
         strcpy_s(sql, query.c_str());
 
         if (mysql_query(conn, sql) != 0) {

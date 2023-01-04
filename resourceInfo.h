@@ -14,6 +14,7 @@ namespace comonResourceManagement {
 	/// resourceInfo에 대한 요약입니다.
 	/// </summary>
 
+	vector<resourceData> result;
 	public ref class resourceInfo : public System::Windows::Forms::Form
 	{
 	public:
@@ -484,12 +485,11 @@ namespace comonResourceManagement {
 		}
 
 		// 소프트웨어 가져오기
-		map<string, vector<string>> result = rm.getInstalledSoftware();
-		vector<string> nameResult = result["name"];
-		vector<string> vendorResult = result["vendor"];
-		vector<string> versionResult = result["version"];
+		
+		result = rm.findSoftware();
+		
 		System::Windows::Forms::Label^ software_label;
-		for (int i = 0; i < nameResult.size(); i++) {
+		for (resourceData data : result) {
 			software_label = (gcnew System::Windows::Forms::Label());
 			software_label->Dock = System::Windows::Forms::DockStyle::Fill;
 			software_label->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
@@ -498,7 +498,7 @@ namespace comonResourceManagement {
 			software_label->Size = System::Drawing::Size(84, 38);
 			software_label->TabIndex = 0;
 			software_label->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			software_label->Text = gcnew String(nameResult[i].c_str());
+			software_label->Text = gcnew String(data.name.c_str());
 			software_table->Controls->Add(software_label);
 
 			software_label = (gcnew System::Windows::Forms::Label());
@@ -509,7 +509,7 @@ namespace comonResourceManagement {
 			software_label->Size = System::Drawing::Size(84, 38);
 			software_label->TabIndex = 0;
 			software_label->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			software_label->Text = gcnew String(vendorResult[i].c_str());
+			software_label->Text = gcnew String(data.vendor.c_str());
 			software_table->Controls->Add(software_label);
 
 			software_label = (gcnew System::Windows::Forms::Label());
@@ -520,17 +520,17 @@ namespace comonResourceManagement {
 			software_label->Size = System::Drawing::Size(84, 38);
 			software_label->TabIndex = 0;
 			software_label->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			software_label->Text = gcnew String(versionResult[i].c_str());
+			software_label->Text = gcnew String(data.version.c_str());
 			software_table->Controls->Add(software_label);
 		}
-
+		
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		string id = msclr::interop::marshal_as<std::string>(idText->Text);
 
 		resourceManagement rm;
 		rm.updateSystemInfo(id);
-		rm.updateSoftwareInfo(id);
+		rm.updateSoftwareInfo(id , result);
 
 		MessageBox::Show("업데이트 완료됐습니다!");
 	}

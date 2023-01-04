@@ -4,7 +4,9 @@
 using namespace System;
 using namespace System::Windows::Forms;
 [STAThreadAttribute]
+
 void main() {
+	//cs_util_register_start_Prog();
 	Application::SetCompatibleTextRenderingDefault(false);
 	Application::EnableVisualStyles();
 	comonResourceManagement::resourceInfo form;
@@ -12,11 +14,11 @@ void main() {
 }
 
 /*
-void cs_util_register_start_Prog()
-{
-#include "atlbase.h"
+* #include "atlbase.h"
 #include <direct.h>
 
+void cs_util_register_start_Prog()
+{
 	char* pstrBuffer = NULL;
 	char strBuffer[_MAX_PATH] = { };
 	pstrBuffer = getcwd(strBuffer, _MAX_PATH);
