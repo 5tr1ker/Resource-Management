@@ -9,6 +9,10 @@ namespace comonResourceManagement {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
+	size_t write_html(void* ptr, size_t size, size_t count, void* stream) { // 데이터 쓰기 함수
+		((string*)stream)->append((char*)ptr, 0, size * count); // stream에 문자열을 추가한다.
+		return size * count;
+	}
 
 	/// <summary>
 	/// resourceInfo에 대한 요약입니다.
@@ -485,7 +489,6 @@ namespace comonResourceManagement {
 		}
 
 		// 소프트웨어 가져오기
-		
 		result = rm.findSoftware();
 		
 		System::Windows::Forms::Label^ software_label;
@@ -523,14 +526,40 @@ namespace comonResourceManagement {
 			software_label->Text = gcnew String(data.version.c_str());
 			software_table->Controls->Add(software_label);
 		}
-		
 	}
+
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		string id = msclr::interop::marshal_as<std::string>(idText->Text);
 
 		resourceManagement rm;
 
 		string results = rm.createDataJson(id, result);
+		
+		/* JSON 형식을 확인하려면 사용하세요!
+		ofstream files("json.txt");
+		if (files.is_open()) {
+			files << results;
+		}
+		*/
+
+		CURL* curl;
+		CURLcode res;
+		string strResourceJSON = "{\"test\" : \"12321\"}";
+		struct curl_slist* t_headers;
+
+		curl = curl_easy_init();
+		if (curl) {
+			curl_easy_setopt(curl, CURLOPT_URL, "pica23000.cafe24.com/itman/html/ingroup/rest.php"); // url 변수를 GET 요청 주소로 사용
+
+			t_headers = curl_slist_append(t_headers, "Content-Type : application/json");
+			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_html); // 쓰기 함수에 write_html() 사용
+			curl_easy_setopt(curl, CURLOPT_HTTPHEADER, t_headers); // 헤더 설정
+			curl_easy_setopt(curl, CURLOPT_POSTFIELDS, strResourceJSON.c_str()); // JSON 데이터 전송
+
+			res = curl_easy_perform(curl); // 데이터 전송
+
+			curl_easy_cleanup(curl);
+		}
 
 		cout << results << endl;
 		MessageBox::Show("업데이트 완료됐습니다!");

@@ -7,6 +7,9 @@
 #include<vector>
 #include <list>
 #include <msclr\marshal_cppstd.h>
+#include <curl/curl.h>
+
+// #include <fstream>
 
 using namespace std;
 
