@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "functions.h"
 namespace comonResourceManagement {
@@ -9,13 +9,13 @@ namespace comonResourceManagement {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	size_t write_html(void* ptr, size_t size, size_t count, void* stream) { // µ¥ÀÌÅÍ ¾²±â ÇÔ¼ö
-		((string*)stream)->append((char*)ptr, 0, size * count); // stream¿¡ ¹®ÀÚ¿­À» Ãß°¡ÇÑ´Ù.
+	size_t write_html(void* ptr, size_t size, size_t count, void* stream) { // ë°ì´í„° ì“°ê¸° í•¨ìˆ˜
+		((string*)stream)->append((char*)ptr, 0, size * count); // streamì— ë¬¸ìì—´ì„ ì¶”ê°€í•œë‹¤.
 		return size * count;
 	}
 
 	/// <summary>
-	/// resourceInfo¿¡ ´ëÇÑ ¿ä¾àÀÔ´Ï´Ù.
+	/// resourceInfoì— ëŒ€í•œ ìš”ì•½ì…ë‹ˆë‹¤.
 	/// </summary>
 
 	vector<resourceData> result;
@@ -26,13 +26,13 @@ namespace comonResourceManagement {
 		{
 			InitializeComponent();
 			//
-			//TODO: »ı¼ºÀÚ ÄÚµå¸¦ ¿©±â¿¡ Ãß°¡ÇÕ´Ï´Ù.
+			//TODO: ìƒì„±ì ì½”ë“œë¥¼ ì—¬ê¸°ì— ì¶”ê°€í•©ë‹ˆë‹¤.
 			//
 		}
 
 	protected:
 		/// <summary>
-		/// »ç¿ë ÁßÀÎ ¸ğµç ¸®¼Ò½º¸¦ Á¤¸®ÇÕ´Ï´Ù.
+		/// ì‚¬ìš© ì¤‘ì¸ ëª¨ë“  ë¦¬ì†ŒìŠ¤ë¥¼ ì •ë¦¬í•©ë‹ˆë‹¤.
 		/// </summary>
 		~resourceInfo()
 		{
@@ -88,14 +88,14 @@ namespace comonResourceManagement {
 	protected:
 	private:
 		/// <summary>
-		/// ÇÊ¼ö µğÀÚÀÌ³Ê º¯¼öÀÔ´Ï´Ù.
+		/// í•„ìˆ˜ ë””ìì´ë„ˆ ë³€ìˆ˜ì…ë‹ˆë‹¤.
 		/// </summary>
 		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// µğÀÚÀÌ³Ê Áö¿ø¿¡ ÇÊ¿äÇÑ ¸Ş¼­µåÀÔ´Ï´Ù. 
-		/// ÀÌ ¸Ş¼­µåÀÇ ³»¿ëÀ» ÄÚµå ÆíÁı±â·Î ¼öÁ¤ÇÏÁö ¸¶¼¼¿ä.
+		/// ë””ìì´ë„ˆ ì§€ì›ì— í•„ìš”í•œ ë©”ì„œë“œì…ë‹ˆë‹¤. 
+		/// ì´ ë©”ì„œë“œì˜ ë‚´ìš©ì„ ì½”ë“œ í¸ì§‘ê¸°ë¡œ ìˆ˜ì •í•˜ì§€ ë§ˆì„¸ìš”.
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -129,7 +129,7 @@ namespace comonResourceManagement {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"¸¼Àº °íµñ Semilight", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label1->Font = (gcnew System::Drawing::Font(L"ë§‘ì€ ê³ ë”• Semilight", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
@@ -137,12 +137,12 @@ namespace comonResourceManagement {
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(118, 25);
 			this->label1->TabIndex = 0;
-			this->label1->Text = L"ºÎ¼ÓÇ° Á¤º¸";
+			this->label1->Text = L"ë¶€ì†í’ˆ ì •ë³´";
 			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Font = (gcnew System::Drawing::Font(L"¸¼Àº °íµñ Semilight", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label2->Font = (gcnew System::Drawing::Font(L"ë§‘ì€ ê³ ë”• Semilight", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->label2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
@@ -150,7 +150,7 @@ namespace comonResourceManagement {
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(158, 25);
 			this->label2->TabIndex = 1;
-			this->label2->Text = L"¼ÒÇÁÆ®¿ş¾î Á¤º¸";
+			this->label2->Text = L"ì†Œí”„íŠ¸ì›¨ì–´ ì •ë³´";
 			// 
 			// tableLayoutPanel1
 			// 
@@ -382,7 +382,7 @@ namespace comonResourceManagement {
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Font = (gcnew System::Drawing::Font(L"¸¼Àº °íµñ Semilight", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label4->Font = (gcnew System::Drawing::Font(L"ë§‘ì€ ê³ ë”• Semilight", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(129)));
 			this->label4->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
@@ -390,7 +390,7 @@ namespace comonResourceManagement {
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(118, 25);
 			this->label4->TabIndex = 5;
-			this->label4->Text = L"ÀÚ»ê°ü¸® ID";
+			this->label4->Text = L"ìì‚°ê´€ë¦¬ ID";
 			// 
 			// idText
 			// 
@@ -407,7 +407,7 @@ namespace comonResourceManagement {
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 23);
 			this->button1->TabIndex = 7;
-			this->button1->Text = L"Àü¼Û";
+			this->button1->Text = L"ì „ì†¡";
 			this->button1->UseVisualStyleBackColor = false;
 			this->button1->Click += gcnew System::EventHandler(this, &resourceInfo::button1_Click);
 			// 
@@ -488,7 +488,7 @@ namespace comonResourceManagement {
 			graphic_table->Controls->Add(gpu_label);
 		}
 
-		// ¼ÒÇÁÆ®¿ş¾î °¡Á®¿À±â
+		// ì†Œí”„íŠ¸ì›¨ì–´ ê°€ì ¸ì˜¤ê¸°
 		result = rm.findSoftware();
 		
 		System::Windows::Forms::Label^ software_label;
@@ -535,7 +535,7 @@ namespace comonResourceManagement {
 
 		string results = rm.createDataJson(id, result);
 		
-		/* JSON Çü½ÄÀ» È®ÀÎÇÏ·Á¸é »ç¿ëÇÏ¼¼¿ä!
+		/* JSON í˜•ì‹ì„ í™•ì¸í•˜ë ¤ë©´ ì‚¬ìš©í•˜ì„¸ìš”!
 		ofstream files("json.txt");
 		if (files.is_open()) {
 			files << results;
@@ -544,25 +544,23 @@ namespace comonResourceManagement {
 
 		CURL* curl;
 		CURLcode res;
-		string strResourceJSON = "{\"test\" : \"12321\"}";
 		struct curl_slist* t_headers;
 
 		curl = curl_easy_init();
 		if (curl) {
-			curl_easy_setopt(curl, CURLOPT_URL, "pica23000.cafe24.com/itman/html/ingroup/rest.php"); // url º¯¼ö¸¦ GET ¿äÃ» ÁÖ¼Ò·Î »ç¿ë
+			curl_easy_setopt(curl, CURLOPT_URL, "pica23000.cafe24.com/itman/html/ingroup/rest.php"); // url ë³€ìˆ˜ë¥¼ GET ìš”ì²­ ì£¼ì†Œë¡œ ì‚¬ìš©
 
 			t_headers = curl_slist_append(t_headers, "Content-Type : application/json");
-			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_html); // ¾²±â ÇÔ¼ö¿¡ write_html() »ç¿ë
-			curl_easy_setopt(curl, CURLOPT_HTTPHEADER, t_headers); // Çì´õ ¼³Á¤
-			curl_easy_setopt(curl, CURLOPT_POSTFIELDS, strResourceJSON.c_str()); // JSON µ¥ÀÌÅÍ Àü¼Û
+			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_html); // ì“°ê¸° í•¨ìˆ˜ì— write_html() ì‚¬ìš©
+			curl_easy_setopt(curl, CURLOPT_HTTPHEADER, t_headers); // í—¤ë” ì„¤ì •
+			curl_easy_setopt(curl, CURLOPT_POSTFIELDS, results.c_str()); // JSON ë°ì´í„° ì „ì†¡
 
-			res = curl_easy_perform(curl); // µ¥ÀÌÅÍ Àü¼Û
+			res = curl_easy_perform(curl); // ë°ì´í„° ì „ì†¡
 
 			curl_easy_cleanup(curl);
 		}
-
-		cout << results << endl;
-		MessageBox::Show("¾÷µ¥ÀÌÆ® ¿Ï·áµÆ½À´Ï´Ù!");
+		
+		MessageBox::Show("ì—…ë°ì´íŠ¸ ì™„ë£ŒëìŠµë‹ˆë‹¤!");
 	}
 };
 }

@@ -1,4 +1,4 @@
-#ifndef functions_H
+ï»¿#ifndef functions_H
 #define functions_H
 #include <map>
 #include<iostream>
@@ -22,7 +22,7 @@ public:
 
 class resourceManagement {
 public:
-	// ¼ÒÇÁÆ®¿þ¾î Á¤º¸
+	// ì†Œí”„íŠ¸ì›¨ì–´ ì •ë³´
 	//string updateSystemInfo(string id);
 	//string updateSoftwareInfo(string id , vector<resourceData> result);
 	string createDataJson(string id, vector<resourceData> result);
