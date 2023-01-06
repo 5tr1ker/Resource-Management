@@ -8,7 +8,8 @@
 #include <list>
 #include <msclr\marshal_cppstd.h>
 #include <curl/curl.h>
-
+#include <conio.h>
+// #include <cstring>
 // #include <fstream>
 
 using namespace std;

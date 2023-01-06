@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "functions.h"
+
 namespace comonResourceManagement {
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -28,7 +29,10 @@ namespace comonResourceManagement {
 			//
 			//TODO: 생성자 코드를 여기에 추가합니다.
 			//
+			this->Closing += gcnew CancelEventHandler(this, &resourceInfo::Form1_Closing);
 		}
+
+	
 
 	protected:
 		/// <summary>
@@ -79,6 +83,18 @@ namespace comonResourceManagement {
 	private: System::Windows::Forms::TextBox^ idText;
 
 	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::NotifyIcon^ notifyIcon1;
+	private: System::Windows::Forms::ContextMenuStrip^ trayIconMenu;
+	private: System::Windows::Forms::ToolStripTextBox^ toolStripTextBox1;
+	private: System::Windows::Forms::ToolStripTextBox^ toolStripTextBox2;
+	private: System::Windows::Forms::ToolStripTextBox^ toolStripTextBox3;
+
+
+
+
+
+
+	private: System::ComponentModel::IContainer^ components;
 
 
 
@@ -90,7 +106,7 @@ namespace comonResourceManagement {
 		/// <summary>
 		/// 필수 디자이너 변수입니다.
 		/// </summary>
-		System::ComponentModel::Container^ components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -99,6 +115,7 @@ namespace comonResourceManagement {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(resourceInfo::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
@@ -122,8 +139,14 @@ namespace comonResourceManagement {
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->idText = (gcnew System::Windows::Forms::TextBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->notifyIcon1 = (gcnew System::Windows::Forms::NotifyIcon(this->components));
+			this->trayIconMenu = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
+			this->toolStripTextBox1 = (gcnew System::Windows::Forms::ToolStripTextBox());
+			this->toolStripTextBox3 = (gcnew System::Windows::Forms::ToolStripTextBox());
+			this->toolStripTextBox2 = (gcnew System::Windows::Forms::ToolStripTextBox());
 			this->tableLayoutPanel1->SuspendLayout();
 			this->panel1->SuspendLayout();
+			this->trayIconMenu->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// label1
@@ -133,7 +156,7 @@ namespace comonResourceManagement {
 				static_cast<System::Byte>(129)));
 			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
-			this->label1->Location = System::Drawing::Point(22, 103);
+			this->label1->Location = System::Drawing::Point(25, 129);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(118, 25);
 			this->label1->TabIndex = 0;
@@ -146,7 +169,7 @@ namespace comonResourceManagement {
 				static_cast<System::Byte>(129)));
 			this->label2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
-			this->label2->Location = System::Drawing::Point(366, 103);
+			this->label2->Location = System::Drawing::Point(418, 129);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(158, 25);
 			this->label2->TabIndex = 1;
@@ -161,7 +184,7 @@ namespace comonResourceManagement {
 			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				66.90909F)));
 			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-				20)));
+				23)));
 			this->tableLayoutPanel1->Controls->Add(this->uuid_info, 1, 6);
 			this->tableLayoutPanel1->Controls->Add(this->label15, 0, 6);
 			this->tableLayoutPanel1->Controls->Add(this->label13, 0, 5);
@@ -176,28 +199,29 @@ namespace comonResourceManagement {
 			this->tableLayoutPanel1->Controls->Add(this->memory_table, 1, 3);
 			this->tableLayoutPanel1->Controls->Add(this->disk_table, 1, 4);
 			this->tableLayoutPanel1->Controls->Add(this->graphic_table, 1, 5);
-			this->tableLayoutPanel1->Location = System::Drawing::Point(27, 140);
+			this->tableLayoutPanel1->Location = System::Drawing::Point(31, 175);
+			this->tableLayoutPanel1->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
 			this->tableLayoutPanel1->RowCount = 7;
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50.9434F)));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 49.0566F)));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 38)));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 60)));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 43)));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 71)));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 37)));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 20)));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 20)));
-			this->tableLayoutPanel1->Size = System::Drawing::Size(298, 333);
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 48)));
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 75)));
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 54)));
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 89)));
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 46)));
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 25)));
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 25)));
+			this->tableLayoutPanel1->Size = System::Drawing::Size(341, 416);
 			this->tableLayoutPanel1->TabIndex = 2;
 			// 
 			// uuid_info
 			// 
 			this->uuid_info->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->uuid_info->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->uuid_info->Location = System::Drawing::Point(102, 294);
+			this->uuid_info->Location = System::Drawing::Point(116, 368);
 			this->uuid_info->Name = L"uuid_info";
-			this->uuid_info->Size = System::Drawing::Size(192, 38);
+			this->uuid_info->Size = System::Drawing::Size(221, 47);
 			this->uuid_info->TabIndex = 17;
 			this->uuid_info->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
@@ -205,9 +229,9 @@ namespace comonResourceManagement {
 			// 
 			this->label15->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->label15->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->label15->Location = System::Drawing::Point(4, 294);
+			this->label15->Location = System::Drawing::Point(4, 368);
 			this->label15->Name = L"label15";
-			this->label15->Size = System::Drawing::Size(91, 38);
+			this->label15->Size = System::Drawing::Size(105, 47);
 			this->label15->TabIndex = 13;
 			this->label15->Text = L"UUID";
 			this->label15->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -216,9 +240,9 @@ namespace comonResourceManagement {
 			// 
 			this->label13->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->label13->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->label13->Location = System::Drawing::Point(4, 222);
+			this->label13->Location = System::Drawing::Point(4, 278);
 			this->label13->Name = L"label13";
-			this->label13->Size = System::Drawing::Size(91, 71);
+			this->label13->Size = System::Drawing::Size(105, 89);
 			this->label13->TabIndex = 11;
 			this->label13->Text = L"GRAPHICS";
 			this->label13->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -227,9 +251,9 @@ namespace comonResourceManagement {
 			// 
 			this->label11->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->label11->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->label11->Location = System::Drawing::Point(4, 178);
+			this->label11->Location = System::Drawing::Point(4, 223);
 			this->label11->Name = L"label11";
-			this->label11->Size = System::Drawing::Size(91, 43);
+			this->label11->Size = System::Drawing::Size(105, 54);
 			this->label11->TabIndex = 9;
 			this->label11->Text = L"DISK";
 			this->label11->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -238,9 +262,9 @@ namespace comonResourceManagement {
 			// 
 			this->label9->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->label9->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->label9->Location = System::Drawing::Point(4, 117);
+			this->label9->Location = System::Drawing::Point(4, 147);
 			this->label9->Name = L"label9";
-			this->label9->Size = System::Drawing::Size(91, 60);
+			this->label9->Size = System::Drawing::Size(105, 75);
 			this->label9->TabIndex = 7;
 			this->label9->Text = L"MEMORY";
 			this->label9->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -249,9 +273,9 @@ namespace comonResourceManagement {
 			// 
 			this->baseboard_info->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->baseboard_info->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->baseboard_info->Location = System::Drawing::Point(102, 78);
+			this->baseboard_info->Location = System::Drawing::Point(116, 98);
 			this->baseboard_info->Name = L"baseboard_info";
-			this->baseboard_info->Size = System::Drawing::Size(192, 38);
+			this->baseboard_info->Size = System::Drawing::Size(221, 48);
 			this->baseboard_info->TabIndex = 6;
 			this->baseboard_info->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
@@ -259,9 +283,9 @@ namespace comonResourceManagement {
 			// 
 			this->label7->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->label7->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->label7->Location = System::Drawing::Point(4, 78);
+			this->label7->Location = System::Drawing::Point(4, 98);
 			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(91, 38);
+			this->label7->Size = System::Drawing::Size(105, 48);
 			this->label7->TabIndex = 5;
 			this->label7->Text = L"BASEBOARD";
 			this->label7->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -270,9 +294,9 @@ namespace comonResourceManagement {
 			// 
 			this->cpu_info->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->cpu_info->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->cpu_info->Location = System::Drawing::Point(102, 40);
+			this->cpu_info->Location = System::Drawing::Point(116, 50);
 			this->cpu_info->Name = L"cpu_info";
-			this->cpu_info->Size = System::Drawing::Size(192, 37);
+			this->cpu_info->Size = System::Drawing::Size(221, 47);
 			this->cpu_info->TabIndex = 4;
 			this->cpu_info->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
@@ -280,9 +304,9 @@ namespace comonResourceManagement {
 			// 
 			this->os_info->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->os_info->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->os_info->Location = System::Drawing::Point(102, 1);
+			this->os_info->Location = System::Drawing::Point(116, 1);
 			this->os_info->Name = L"os_info";
-			this->os_info->Size = System::Drawing::Size(192, 38);
+			this->os_info->Size = System::Drawing::Size(221, 48);
 			this->os_info->TabIndex = 3;
 			this->os_info->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
@@ -290,9 +314,9 @@ namespace comonResourceManagement {
 			// 
 			this->label5->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->label5->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->label5->Location = System::Drawing::Point(4, 40);
+			this->label5->Location = System::Drawing::Point(4, 50);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(91, 37);
+			this->label5->Size = System::Drawing::Size(105, 47);
 			this->label5->TabIndex = 2;
 			this->label5->Text = L"CPU";
 			this->label5->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -303,7 +327,7 @@ namespace comonResourceManagement {
 			this->label3->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
 			this->label3->Location = System::Drawing::Point(4, 1);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(91, 38);
+			this->label3->Size = System::Drawing::Size(105, 48);
 			this->label3->TabIndex = 0;
 			this->label3->Text = L"OS";
 			this->label3->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -313,12 +337,13 @@ namespace comonResourceManagement {
 			this->memory_table->ColumnCount = 1;
 			this->memory_table->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 50)));
 			this->memory_table->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 50)));
-			this->memory_table->Location = System::Drawing::Point(102, 120);
+			this->memory_table->Location = System::Drawing::Point(116, 151);
+			this->memory_table->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->memory_table->Name = L"memory_table";
 			this->memory_table->RowCount = 1;
 			this->memory_table->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
 			this->memory_table->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-			this->memory_table->Size = System::Drawing::Size(192, 54);
+			this->memory_table->Size = System::Drawing::Size(219, 67);
 			this->memory_table->TabIndex = 18;
 			// 
 			// disk_table
@@ -326,12 +351,13 @@ namespace comonResourceManagement {
 			this->disk_table->ColumnCount = 1;
 			this->disk_table->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 50)));
 			this->disk_table->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 50)));
-			this->disk_table->Location = System::Drawing::Point(102, 181);
+			this->disk_table->Location = System::Drawing::Point(116, 227);
+			this->disk_table->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->disk_table->Name = L"disk_table";
 			this->disk_table->RowCount = 1;
 			this->disk_table->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
 			this->disk_table->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-			this->disk_table->Size = System::Drawing::Size(192, 37);
+			this->disk_table->Size = System::Drawing::Size(219, 46);
 			this->disk_table->TabIndex = 19;
 			// 
 			// graphic_table
@@ -341,21 +367,23 @@ namespace comonResourceManagement {
 				50)));
 			this->graphic_table->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				50)));
-			this->graphic_table->Location = System::Drawing::Point(102, 225);
+			this->graphic_table->Location = System::Drawing::Point(116, 282);
+			this->graphic_table->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->graphic_table->Name = L"graphic_table";
 			this->graphic_table->RowCount = 1;
 			this->graphic_table->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
 			this->graphic_table->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-			this->graphic_table->Size = System::Drawing::Size(192, 65);
+			this->graphic_table->Size = System::Drawing::Size(219, 81);
 			this->graphic_table->TabIndex = 20;
 			// 
 			// panel1
 			// 
 			this->panel1->AutoScroll = true;
 			this->panel1->Controls->Add(this->software_table);
-			this->panel1->Location = System::Drawing::Point(371, 140);
+			this->panel1->Location = System::Drawing::Point(424, 175);
+			this->panel1->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(407, 333);
+			this->panel1->Size = System::Drawing::Size(465, 416);
 			this->panel1->TabIndex = 4;
 			// 
 			// software_table
@@ -369,14 +397,15 @@ namespace comonResourceManagement {
 			this->software_table->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				57.93651F)));
 			this->software_table->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-				160)));
+				205)));
 			this->software_table->Dock = System::Windows::Forms::DockStyle::Top;
 			this->software_table->Location = System::Drawing::Point(0, 0);
+			this->software_table->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->software_table->Name = L"software_table";
 			this->software_table->RowCount = 1;
 			this->software_table->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
 			this->software_table->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-			this->software_table->Size = System::Drawing::Size(407, 2);
+			this->software_table->Size = System::Drawing::Size(465, 2);
 			this->software_table->TabIndex = 0;
 			// 
 			// label4
@@ -386,7 +415,7 @@ namespace comonResourceManagement {
 				static_cast<System::Byte>(129)));
 			this->label4->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
-			this->label4->Location = System::Drawing::Point(22, 20);
+			this->label4->Location = System::Drawing::Point(25, 25);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(118, 25);
 			this->label4->TabIndex = 5;
@@ -394,30 +423,69 @@ namespace comonResourceManagement {
 			// 
 			// idText
 			// 
-			this->idText->Location = System::Drawing::Point(27, 58);
+			this->idText->Location = System::Drawing::Point(31, 72);
+			this->idText->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->idText->Name = L"idText";
-			this->idText->Size = System::Drawing::Size(273, 21);
+			this->idText->Size = System::Drawing::Size(311, 25);
 			this->idText->TabIndex = 6;
 			// 
 			// button1
 			// 
 			this->button1->BackColor = System::Drawing::SystemColors::ControlLightLight;
 			this->button1->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->button1->Location = System::Drawing::Point(325, 56);
+			this->button1->Location = System::Drawing::Point(371, 70);
+			this->button1->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->Size = System::Drawing::Size(86, 29);
 			this->button1->TabIndex = 7;
 			this->button1->Text = L"전송";
 			this->button1->UseVisualStyleBackColor = false;
 			this->button1->Click += gcnew System::EventHandler(this, &resourceInfo::button1_Click);
 			// 
+			// notifyIcon1
+			// 
+			this->notifyIcon1->ContextMenuStrip = this->trayIconMenu;
+			this->notifyIcon1->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"notifyIcon1.Icon")));
+			this->notifyIcon1->Text = L"ITMan-PC";
+			this->notifyIcon1->Visible = true;
+			// 
+			// trayIconMenu
+			// 
+			this->trayIconMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+				this->toolStripTextBox1,
+					this->toolStripTextBox3, this->toolStripTextBox2
+			});
+			this->trayIconMenu->Name = L"trayIconMenu";
+			this->trayIconMenu->Size = System::Drawing::Size(181, 101);
+			// 
+			// toolStripTextBox1
+			// 
+			this->toolStripTextBox1->Name = L"toolStripTextBox1";
+			this->toolStripTextBox1->Size = System::Drawing::Size(100, 23);
+			this->toolStripTextBox1->Text = L"숨기기";
+			this->toolStripTextBox1->Click += gcnew System::EventHandler(this, &resourceInfo::toolStripTextBox1_Click);
+			// 
+			// toolStripTextBox3
+			// 
+			this->toolStripTextBox3->Name = L"toolStripTextBox3";
+			this->toolStripTextBox3->Size = System::Drawing::Size(100, 23);
+			this->toolStripTextBox3->Text = L"보이기";
+			this->toolStripTextBox3->Click += gcnew System::EventHandler(this, &resourceInfo::toolStripTextBox3_Click);
+			// 
+			// toolStripTextBox2
+			// 
+			this->toolStripTextBox2->Name = L"toolStripTextBox2";
+			this->toolStripTextBox2->Size = System::Drawing::Size(100, 23);
+			this->toolStripTextBox2->Text = L"종료";
+			this->toolStripTextBox2->Click += gcnew System::EventHandler(this, &resourceInfo::toolStripTextBox2_Click);
+			// 
 			// resourceInfo
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(7, 12);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 15);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoValidate = System::Windows::Forms::AutoValidate::EnablePreventFocusChange;
 			this->BackColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->ClientSize = System::Drawing::Size(815, 533);
+			this->ClientSize = System::Drawing::Size(931, 666);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->idText);
 			this->Controls->Add(this->label4);
@@ -434,6 +502,8 @@ namespace comonResourceManagement {
 			this->tableLayoutPanel1->ResumeLayout(false);
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
+			this->trayIconMenu->ResumeLayout(false);
+			this->trayIconMenu->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -534,8 +604,9 @@ namespace comonResourceManagement {
 		resourceManagement rm;
 
 		string results = rm.createDataJson(id, result);
+		/* 
+		JSON 형식을 확인하려면 사용하세요!
 		
-		/* JSON 형식을 확인하려면 사용하세요!
 		ofstream files("json.txt");
 		if (files.is_open()) {
 			files << results;
@@ -548,7 +619,7 @@ namespace comonResourceManagement {
 
 		curl = curl_easy_init();
 		if (curl) {
-			curl_easy_setopt(curl, CURLOPT_URL, "pica23000.cafe24.com/itman/html/ingroup/rest.php"); // url 변수를 GET 요청 주소로 사용
+			curl_easy_setopt(curl, CURLOPT_URL, "itman.pms.or.kr/html/ingroup/rest.php"); // url 변수를 GET 요청 주소로 사용
 
 			t_headers = curl_slist_append(t_headers, "Content-Type : application/json");
 			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_html); // 쓰기 함수에 write_html() 사용
@@ -561,6 +632,25 @@ namespace comonResourceManagement {
 		}
 		
 		MessageBox::Show("업데이트 완료됐습니다!");
+		
 	}
+
+	private: System::Void Form1_Closing(Object^ sender, System::ComponentModel::CancelEventArgs^ e)
+	{
+		notifyIcon1->Visible = true;
+		this->Hide();
+		e->Cancel = true;
+	}
+
+private: System::Void toolStripTextBox2_Click(System::Object^ sender, System::EventArgs^ e) {
+	Application::Exit();
+}
+private: System::Void toolStripTextBox1_Click(System::Object^ sender, System::EventArgs^ e) {
+	notifyIcon1->Visible = true;
+	this->Hide();
+}
+private: System::Void toolStripTextBox3_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->Show();
+}
 };
 }
