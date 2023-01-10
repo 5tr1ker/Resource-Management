@@ -3,6 +3,11 @@
 
 #include "json/json.h"
 
+size_t write_html(void* ptr, size_t size, size_t count, void* stream) { // 데이터 쓰기 함수
+    ((string*)stream)->append((char*)ptr, 0, size * count); // stream에 문자열을 추가한다.
+    return size * count;
+}
+
 string replaceAll(const string& str, const string& pattern, const string& replace)
 {
     string result = str;
@@ -399,245 +404,6 @@ list<string> resourceManagement::getMemory() {
     return returnIndex;
 }
 
-/*
- mysql DDL Query
-CREATE TABLE `comon`.`system_infos` (
-  `ulid` VARCHAR(100) NOT NULL,
-  `os` VARCHAR(100) NOT NULL,
-  `cpu` VARCHAR(100) NOT NULL,
-  `baseboard` VARCHAR(100) NOT NULL,
-  `memory1` VARCHAR(100) NOT NULL,
-  `memory2` VARCHAR(100) NULL,
-  `memory3` VARCHAR(100) NULL,
-  `memory4` VARCHAR(100) NULL,
-  `disk1` VARCHAR(100) NOT NULL,
-  `disk2` VARCHAR(100) NULL,
-  `graphic1` VARCHAR(100) NOT NULL,
-  `graphic2` VARCHAR(100) NULL,
-  `uuid` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`ulid`));
-
-string resourceManagement::updateSystemInfo(string id) {
-    string str;
-    Json::StyledWriter writer;
-    Json::Value root;
-
-    Json::Value hdd;
-    list<string> hddList = getHDD();
-    for (string str : hddList)
-        hdd.append(replaceAll(str , "\r\n" , ""));
-
-    Json::Value memory;
-    list<string> memoryList = getMemory();
-    for (string str : memoryList)
-        memory.append(replaceAll(str, "\r\n", ""));
-
-    Json::Value gpu;
-    vector<string> gpuList = getGPU();
-    for (string str : gpuList)
-        gpu.append(replaceAll(str, "\r\n", ""));
-
-    root["os"] = replaceAll(GetOSName(), "\r\n", "");
-    root["cpu"] = replaceAll(GetProcessorName(), "\r\n", "");
-    root["baseBoard"] = replaceAll(getBaseBoard(), "\r\n", "");
-    root["uuid"] = replaceAll(getOSUUID(), "\r\n", "");
-    root["hdd"] = hdd;
-    root["memory"] = memory;
-    root["gpu"] = gpu;
-
-    str = writer.write(root);
-
-    return str;
-    /*
-    
-    MYSQL* conn, connection;
-    MYSQL_ROW row;
-
-    char DB_HOST[] = "localhost";
-    char DB_USER[] = "root";
-    char DB_PASS[] = "password";
-    char DB_NAME[] = "comon";
-
-    // DB 커넥션 연결
-    mysql_init(&connection);
-    conn = mysql_real_connect(&connection, DB_HOST, DB_USER, DB_PASS, DB_NAME, 3306, (char*)NULL, 0);
-    char sql[1024];
-
-    // System 정보 가져와 쿼리 만들기
-    string query = "INSERT INTO `comon`.`system_infos` (`ulid`, `os`, `cpu`, `baseboard`, `uuid` ";
-    string last_query;
-    list<string> hddList = getHDD();
-    list<string> memoryList = getMemory();
-    vector<string> gpuList = getGPU();
-    int i;
-    for (i = 0; i < gpuList.size(); i++) {
-        query = query + ", `graphic" + to_string(i + 1) + "` ";
-        last_query = last_query + ", '" + gpuList[i] + "' ";
-    }
-    i = 0;
-    for (string str : memoryList) {
-        query = query + ", `memory" + to_string(i + 1) + "` ";
-        last_query = last_query + ", '" + str + "' ";
-        i++;
-    }
-    i = 0;
-    for (string str : hddList) {
-        query = query + ", `disk" + to_string(i + 1) + "` ";
-        last_query = last_query + ", '" + str + "' ";
-        i++;
-    }
-    query += ") VALUES ('" + id + "' , '" + GetOSName() + "' , '" + GetProcessorName() + "' , '" + getBaseBoard() + "' , '" + getOSUUID() + "' " + last_query + ");";
-
-    // 작성된 쿼리를 DB에 저장하기
-    strcpy_s(sql, query.c_str());
-    if (mysql_query(conn, sql) != 0) {
-        cout << "systemInfo.cpp 파일에서 오류 발생!";
-    }
-
-    mysql_close(conn);
-    
-}
-*/
-
-/*
-CREATE TABLE `comon`.`software_infos` (
-  `ulid` VARCHAR(100) NOT NULL,
-  `name` VARCHAR(100) NOT NULL,
-  `vendor` VARCHAR(100) NOT NULL,
-  `version` VARCHAR(100) NOT NULL,
-  `software_infos_key` INT NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`software_infos_key`));
-*/
-/*
-string resourceManagement::updateSoftwareInfo(string id , vector<resourceData> result) {
-    // JSON 방식
-    string str;
-    Json::StyledWriter writer;
-    result.erase(result.begin());
-    for (resourceData data : result) {
-        Json::Value piece;
-        string name = data.name;
-        if (name.size() < 5) {
-            continue;
-        }
-        piece["name"] = replaceAll(data.name, "\r\n", "");
-        piece["vendor"] = replaceAll(data.vendor, "\r\n", "");
-        piece["version"] = replaceAll(data.version, "\r\n", "");
-
-        str += writer.write(piece);
-    }
-
-    return str;
-    mysql 방식
-    MYSQL* conn, connection;
-    MYSQL_ROW row;
-
-    char DB_HOST[] = "localhost";
-    char DB_USER[] = "root";
-    char DB_PASS[] = "password";
-    char DB_NAME[] = "comon";
-
-    // DB 커넥션 연결
-    mysql_init(&connection);
-    conn = mysql_real_connect(&connection, DB_HOST, DB_USER, DB_PASS, DB_NAME, 3306, (char*)NULL, 0);
-    char sql[1024];
-
-    // query 작성
-    // 한글이 포함되어 있을 때를 위해 사용
-    mysql_query(conn, "set session character_set_connection=euckr;");
-    mysql_query(conn, "set session character_set_results=euckr;");
-    mysql_query(conn, "set session character_set_client=euckr;");
-    string query;
-    result.erase(result.begin());
-    for (resourceData data : result) {
-        string name = data.name;
-        if (name.size() < 5) {
-            continue;
-        }
-        string vendor = data.vendor;
-        string version = data.version;
-        query = "INSERT INTO `comon`.`software_infos` (`ulid` , `name` , `vendor` , `version`) VALUES ('" + id + "' , '" + name + "' , '" + vendor + "' , '" + version + "');";
-        strcpy_s(sql, query.c_str());
-
-        if (mysql_query(conn, sql) != 0) {
-        }
-    }
-
-    mysql_close(conn);
-}
-*/
-/*
-void resourceManagement::getSoftwareInfo(const char* ulid) {
-    MYSQL* conn, connection;
-    MYSQL_RES* result;
-    MYSQL_ROW row;
-
-    char DB_HOST[] = "localhost";
-    char DB_USER[] = "root";
-    char DB_PASS[] = "password";
-    char DB_NAME[] = "comon";
-
-    // DB 커넥션 연결
-    mysql_init(&connection);
-    conn = mysql_real_connect(&connection, DB_HOST, DB_USER, DB_PASS, DB_NAME, 3306, (char*)NULL, 0);
-    char sql[1024];
-
-    // query 작성
-    // 한글이 포함되어 있을 때를 위해 사용
-    mysql_query(conn, "set session character_set_connection=euckr;");
-    mysql_query(conn, "set session character_set_results=euckr;");
-    mysql_query(conn, "set session character_set_client=euckr;");
-
-    string ulid_id(ulid);
-    string str = "select name , vendor , version from software_infos where ulid = '" + ulid_id + "';";
-    strcpy_s(sql, str.c_str());
-
-    if (mysql_query(conn, sql) == 0) {
-        result = mysql_store_result(conn);
-        while ((row = mysql_fetch_row(result)) != NULL) {
-            cout << row[0] << row[1] << row[2] << endl;
-        }
-        mysql_free_result(result);
-    }
-    else { // sql 실패
-        cerr << "SQL 문 실행에 실패했습니다.";
-    }
-}
-*/
-
-/*
-void resourceManagement::getSystemInfo(const char* ulid) {
-    MYSQL* conn, connection;
-    MYSQL_RES* result;
-    MYSQL_ROW row;
-
-    char DB_HOST[] = "localhost";
-    char DB_USER[] = "root";
-    char DB_PASS[] = "password";
-    char DB_NAME[] = "comon";
-
-    // DB 커넥션 연결
-    mysql_init(&connection);
-    conn = mysql_real_connect(&connection, DB_HOST, DB_USER, DB_PASS, DB_NAME, 3306, (char*)NULL, 0);
-    char sql[1024];
-
-    string ulid_id(ulid);
-    string str = "select * from system_infos where ulid = '" + ulid_id + "';";
-    strcpy_s(sql, str.c_str());
-
-    if (mysql_query(conn, sql) == 0) {
-        result = mysql_store_result(conn);
-        while ((row = mysql_fetch_row(result)) != NULL) {
-            cout << row[0] << row[1];
-            if (row[6] == NULL) {
-                cout << "NuLL 값 이라니 ㅜㅜ" << endl;
-            }
-        }
-        mysql_free_result(result);
-    }
-}
-*/
-
 string resourceManagement::createDataJson(string id, vector<resourceData> result) {
     string str;
     Json::StyledWriter writer;
@@ -688,4 +454,29 @@ string resourceManagement::createDataJson(string id, vector<resourceData> result
     string resultdata = writer.write(root);
 
     return resultdata;
+}
+
+bool resourceManagement::updateData(string jsonData) {
+    CURL* curl;
+    CURLcode res;
+    struct curl_slist* t_headers;
+
+    curl = curl_easy_init();
+    if (curl) {
+        // 테스트 서버 : pica23000.cafe24.com/itman/html/ingroup/rest.php
+        // 본 서버 : itman.pms.or.kr/html/ingroup/rest.php
+        curl_easy_setopt(curl, CURLOPT_URL, "itman.pms.or.kr/html/ingroup/rest.php"); // url 변수를 GET 요청 주소로 사용
+
+        //t_headers = curl_slist_append(t_headers, "Content-Type : application/json");
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_html); // 쓰기 함수에 write_html() 사용
+        //curl_easy_setopt(curl, CURLOPT_HTTPHEADER, t_headers); // 헤더 설정
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, jsonData.c_str()); // JSON 데이터 
+
+        res = curl_easy_perform(curl); // 데이터 전송
+
+        curl_easy_cleanup(curl);
+
+        if (res == CURLE_OK) return true;
+        else return false;
+    }
 }

@@ -8,6 +8,7 @@
 #include <list>
 #include <msclr\marshal_cppstd.h>
 #include <curl/curl.h>
+#include <curl/easy.h>
 #include <conio.h>
 // #include <cstring>
 // #include <fstream>
@@ -24,11 +25,7 @@ public:
 class resourceManagement {
 public:
 	// 소프트웨어 정보
-	//string updateSystemInfo(string id);
-	//string updateSoftwareInfo(string id , vector<resourceData> result);
 	string createDataJson(string id, vector<resourceData> result);
-	//void getSoftwareInfo(const char* ulid);
-	//void getSystemInfo(const char* ulid);
 	string GetProcessorName();
 	string getBaseBoard();
 	string GetOSName();
@@ -37,6 +34,7 @@ public:
 	vector<string> getGPU();
 	string getOSUUID();
 	vector<resourceData> findSoftware();
+	bool updateData(string jsonData);
 };
 
 #endif
