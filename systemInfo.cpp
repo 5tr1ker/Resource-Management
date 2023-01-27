@@ -134,82 +134,6 @@ std::string resourceManagement::GetOSName()
     return str + " " + str2;
 }
 
-std::string ExecCommand(std::string szCmdArg)
-{
-    std::string szResult;
-
-    HANDLE hChildStdoutRd;
-    HANDLE hChildStdoutWr;
-
-    BOOL fSuccess;
-
-    // Create security attributes to create pipe.
-    SECURITY_ATTRIBUTES saAttr = { sizeof(SECURITY_ATTRIBUTES) };
-    saAttr.bInheritHandle = TRUE;
-    saAttr.lpSecurityDescriptor = NULL;
-
-    // Create a pipe to get results from child's stdout.
-    if (!CreatePipe(&hChildStdoutRd, &hChildStdoutWr, &saAttr, 0))
-    {
-        return szResult;
-    }
-
-    STARTUPINFOA si = { sizeof(STARTUPINFO) };
-
-    si.dwFlags = STARTF_USESHOWWINDOW | STARTF_USESTDHANDLES;
-    si.hStdOutput = hChildStdoutWr;
-    si.hStdError = hChildStdoutWr;
-    si.wShowWindow = SW_HIDE;
-
-    PROCESS_INFORMATION pi = { 0 };
-
-    // Create the child process.
-    fSuccess = CreateProcessA(
-        NULL,
-        (LPSTR)szCmdArg.c_str(),    // command line
-        NULL,                       // process security attributes
-        NULL,                       // primary thread security attributes
-        TRUE,                       // TRUE=handles are inherited. Required.
-        CREATE_NEW_CONSOLE,         // creation flags
-        NULL,                       // use parent's environment
-        NULL,                       // use parent's current directory
-        &si,                        // __in, STARTUPINFO pointer
-        &pi);                       // __out, receives PROCESS_INFORMATION
-
-    if (!fSuccess)
-    {
-        return szResult;
-    }
-
-    // Wait until child processes exit. Don't wait forever.
-    WaitForSingleObject(pi.hProcess, 2000);
-    TerminateProcess(pi.hProcess, 0);
-
-    if (!CloseHandle(hChildStdoutWr))
-    {
-        return szResult;
-    }
-
-    for (;;)
-    {
-        DWORD dwRead;
-        CHAR chBuf[4096];
-
-        bool done = !ReadFile(hChildStdoutRd, chBuf, 4096, &dwRead, NULL) || dwRead == 0;
-        if (done)
-        {
-            break;
-        }
-
-        szResult += chBuf;
-    }
-
-    CloseHandle(hChildStdoutRd);
-    CloseHandle(pi.hProcess);
-    CloseHandle(pi.hThread);
-    return szResult;
-}
-
 string RunCommand(char* command) {
     char  buff[BUFF_SIZE];
     FILE* fp;
@@ -456,27 +380,23 @@ string resourceManagement::createDataJson(string id, vector<resourceData> result
     return resultdata;
 }
 
+resourceManagement::resourceManagement() {
+    HWND hWnd = GetConsoleWindow();
+
+    ShowWindow(hWnd, SW_HIDE);
+}
+
 bool resourceManagement::updateData(string jsonData) {
-    CURL* curl;
-    CURLcode res;
-    struct curl_slist* t_headers;
-
-    curl = curl_easy_init();
-    if (curl) {
-        // 테스트 서버 : pica23000.cafe24.com/itman/html/ingroup/rest.php
-        // 본 서버 : itman.pms.or.kr/html/ingroup/rest.php
-        curl_easy_setopt(curl, CURLOPT_URL, "itman.pms.or.kr/html/ingroup/rest.php"); // url 변수를 GET 요청 주소로 사용
-
-        //t_headers = curl_slist_append(t_headers, "Content-Type : application/json");
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_html); // 쓰기 함수에 write_html() 사용
-        //curl_easy_setopt(curl, CURLOPT_HTTPHEADER, t_headers); // 헤더 설정
-        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, jsonData.c_str()); // JSON 데이터 
-
-        res = curl_easy_perform(curl); // 데이터 전송
-
-        curl_easy_cleanup(curl);
-
-        if (res == CURLE_OK) return true;
-        else return false;
+    ofstream files("resource.out");
+    if (files.is_open()) {
+        files << jsonData;
     }
+    else {
+        return false;
+    }
+
+    files.close();
+    system("runAPI.exe");
+
+    return true;
 }

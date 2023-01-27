@@ -3,15 +3,15 @@
 #include <map>
 #include<iostream>
 #include<string>
-#include<Windows.h>
+#include<windows.h>
 #include<vector>
 #include <list>
 #include <msclr\marshal_cppstd.h>
-#include <curl/curl.h>
-#include <curl/easy.h>
 #include <conio.h>
-// #include <cstring>
-// #include <fstream>
+#include <stdio.h>
+#include <tchar.h>
+#include <curl/curl.h>
+#include <fstream>
 
 using namespace std;
 
@@ -35,6 +35,7 @@ public:
 	string getOSUUID();
 	vector<resourceData> findSoftware();
 	bool updateData(string jsonData);
+	resourceManagement();
 };
 
 #endif

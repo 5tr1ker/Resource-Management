@@ -13,7 +13,6 @@ namespace comonResourceManagement {
 	/// <summary>
 	/// resourceInfo에 대한 요약입니다.
 	/// </summary>
-
 	vector<resourceData> result;
 	public ref class resourceInfo : public System::Windows::Forms::Form
 	{
@@ -502,6 +501,7 @@ namespace comonResourceManagement {
 
 	private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
 		resourceManagement rm;
+		
 		os_info->Text = gcnew String(rm.GetOSName().c_str());
 		cpu_info->Text = gcnew String(rm.GetProcessorName().c_str());
 		baseboard_info->Text = gcnew String(rm.getBaseBoard().c_str());
@@ -552,7 +552,7 @@ namespace comonResourceManagement {
 		// 소프트웨어 가져오기
 
 		result = rm.findSoftware();
-		
+
 		System::Windows::Forms::Label^ software_label;
 		for (resourceData data : result) {
 			software_label = (gcnew System::Windows::Forms::Label());
